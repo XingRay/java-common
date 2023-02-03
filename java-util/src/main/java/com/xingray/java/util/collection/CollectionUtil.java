@@ -1,7 +1,6 @@
 package com.xingray.java.util.collection;
 
 
-
 import com.xingray.java.base.interfaces.*;
 import com.xingray.java.base.range.DoubleRange;
 import com.xingray.java.base.range.IntRange;
@@ -2477,36 +2476,70 @@ public class CollectionUtil {
             return 0;
         }
 
-        int removedCount = 0;
-
         if (list instanceof RandomAccess) {
+            int removedCount = 0;
             int lastIndex = index + range - 1;
             for (int i = 0; i < range; i++) {
                 list.remove(lastIndex - i);
                 removedCount++;
             }
+            return removedCount;
         } else {
-            int i = 0;
-            Iterator<E> iterator = list.iterator();
-            while (i < index && iterator.hasNext()) {
-                iterator.next();
-                i++;
-            }
+            return remove((Iterable<E>) list, index, range);
+        }
+    }
 
-            if (i < index) {
-                return removedCount;
-            }
+    public static <E> int remove(Iterable<E> iterable, int index, int range) {
+        if (isEmpty(iterable)) {
+            return 0;
+        }
 
-            i = 0;
-            while (i < range && iterator.hasNext()) {
-                iterator.next();
-                iterator.remove();
-                removedCount++;
-                i++;
-            }
+        int removedCount = 0;
+
+
+        int i = 0;
+        Iterator<E> iterator = iterable.iterator();
+        while (i < index && iterator.hasNext()) {
+            iterator.next();
+            i++;
+        }
+
+        if (i < index) {
+            return removedCount;
+        }
+
+        i = 0;
+        while (i < range && iterator.hasNext()) {
+            iterator.next();
+            iterator.remove();
+            removedCount++;
+            i++;
         }
 
         return removedCount;
+    }
+
+    public static <T> int remove(Iterable<T> iterable, Matcher<T> matcher) {
+        return remove(iterable, 0, matcher);
+    }
+
+    public static <T> int remove(Iterable<T> iterable, int startIndex, Matcher<T> matcher) {
+        if (isOutOfIndex(iterable, startIndex)) {
+            return 0;
+        }
+
+        int removeCount = 0;
+        int index = 0;
+        Iterator<T> iterator = iterable.iterator();
+        while (iterator.hasNext()) {
+            T t = iterator.next();
+            if (index >= startIndex && matcher.isMatch(t)) {
+                iterator.remove();
+                removeCount++;
+            }
+            ++index;
+        }
+        return removeCount;
     }
 
     public static <T> IntRange intMinMax(int[] values) {
