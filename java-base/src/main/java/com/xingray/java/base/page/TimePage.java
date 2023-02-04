@@ -3,7 +3,7 @@ package com.xingray.java.base.page;
 import java.util.List;
 
 public class TimePage<T> {
-    private int total;
+    private long total;
 
     private long timestamp;
 
@@ -11,11 +11,11 @@ public class TimePage<T> {
 
     private List<T> dataList;
 
-    public int getTotal() {
+    public long getTotal() {
         return total;
     }
 
-    public void setTotal(int total) {
+    public void setTotal(long total) {
         this.total = total;
     }
 

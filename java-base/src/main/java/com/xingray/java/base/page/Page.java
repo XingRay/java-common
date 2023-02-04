@@ -3,7 +3,7 @@ package com.xingray.java.base.page;
 import java.util.List;
 
 public class Page<T> {
-    private int total;
+    private long total;
 
     private int pageIndex;
 
@@ -21,11 +21,11 @@ public class Page<T> {
         this.dataList = dataList;
     }
 
-    public int getTotal() {
+    public long getTotal() {
         return total;
     }
 
-    public void setTotal(int total) {
+    public void setTotal(long total) {
         this.total = total;
     }
 
