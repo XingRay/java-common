@@ -5,9 +5,9 @@ import java.util.List;
 public class Page<T> {
     private long total;
 
-    private int pageIndex;
+    private long pageIndex;
 
-    private int pageSize;
+    private long pageSize;
 
     private List<T> dataList;
 
@@ -29,19 +29,19 @@ public class Page<T> {
         this.total = total;
     }
 
-    public int getPageIndex() {
+    public long getPageIndex() {
         return pageIndex;
     }
 
-    public void setPageIndex(int pageIndex) {
+    public void setPageIndex(long pageIndex) {
         this.pageIndex = pageIndex;
     }
 
-    public int getPageSize() {
+    public long getPageSize() {
         return pageSize;
     }
 
-    public void setPageSize(int pageSize) {
+    public void setPageSize(long pageSize) {
         this.pageSize = pageSize;
     }
 

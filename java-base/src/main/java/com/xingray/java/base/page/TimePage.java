@@ -7,7 +7,7 @@ public class TimePage<T> {
 
     private long timestamp;
 
-    private int pageSize;
+    private long pageSize;
 
     private List<T> dataList;
 
@@ -27,11 +27,11 @@ public class TimePage<T> {
         this.timestamp = timestamp;
     }
 
-    public int getPageSize() {
+    public long getPageSize() {
         return pageSize;
     }
 
-    public void setPageSize(int pageSize) {
+    public void setPageSize(long pageSize) {
         this.pageSize = pageSize;
     }
 
