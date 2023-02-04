@@ -1,5 +1,7 @@
 package com.xingray.java.base.page;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class TimePage<T> {
@@ -9,38 +11,50 @@ public class TimePage<T> {
 
     private long pageSize;
 
-    private List<T> dataList;
+    private List<T> items;
+
+    private TimePage() {
+    }
+
+    public static <E> TimePage<E> of(long pageSize, long timestamp, long total, List<E> items) {
+        if (pageSize <= 0) {
+            throw new IllegalArgumentException("pageSize must greater than 0");
+        }
+        if (total < 0) {
+            throw new IllegalArgumentException("total must greater than or equals 0");
+        }
+        TimePage<E> page = new TimePage<>();
+        page.pageSize = pageSize;
+        page.timestamp = timestamp;
+        page.total = total;
+        if (items != null) {
+            page.items = new ArrayList<>(items);
+        }
+        return page;
+    }
 
     public long getTotal() {
         return total;
-    }
-
-    public void setTotal(long total) {
-        this.total = total;
     }
 
     public long getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(long timestamp) {
-        this.timestamp = timestamp;
-    }
-
     public long getPageSize() {
         return pageSize;
     }
 
-    public void setPageSize(long pageSize) {
-        this.pageSize = pageSize;
+    public List<T> getItems() {
+        return Collections.unmodifiableList(items);
     }
 
-    public List<T> getDataList() {
-        return dataList;
+    public long getTotalPageCount() {
+        return total / pageSize + (total % pageSize == 0 ? 0 : 1);
     }
 
-    public void setDataList(List<T> dataList) {
-        this.dataList = dataList;
+    public long getItemCount() {
+        return items == null ? 0 : items.size();
     }
 
     @Override
@@ -49,7 +63,7 @@ public class TimePage<T> {
                 "total=" + total +
                 ", timestamp=" + timestamp +
                 ", pageSize=" + pageSize +
-                ", dataList=" + dataList +
+                ", items=" + items +
                 '}';
     }
 }
