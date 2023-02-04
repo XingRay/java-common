@@ -7,6 +7,8 @@ public class TimePage<T> {
 
     private long timestamp;
 
+    private int pageSize;
+
     private List<T> dataList;
 
     public int getTotal() {
@@ -25,6 +27,14 @@ public class TimePage<T> {
         this.timestamp = timestamp;
     }
 
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
     public List<T> getDataList() {
         return dataList;
     }
@@ -38,6 +48,7 @@ public class TimePage<T> {
         return "TimePage{" +
                 "total=" + total +
                 ", timestamp=" + timestamp +
+                ", pageSize=" + pageSize +
                 ", dataList=" + dataList +
                 '}';
     }
