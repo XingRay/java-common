@@ -18,8 +18,32 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>17</java.version>
+        <java-common.version>1.0.0</java-common.version>
     </properties>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter</artifactId>
+                <version>5.9.2</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.xingray</groupId>
+                <artifactId>java-base</artifactId>
+                <version>${java-common.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.xingray</groupId>
+                <artifactId>java-collection</artifactId>
+                <version>${java-common.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
     <dependencies>
     </dependencies>
 

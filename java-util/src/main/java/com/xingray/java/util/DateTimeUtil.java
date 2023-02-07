@@ -11,6 +11,8 @@ public class DateTimeUtil {
     public static final int DAY_IN_MILLS = DAY_IN_SECONDS * 1000;
     public static final ZoneId ZONE_ID_GMT = ZoneId.of("+00:00");
 
+    public static final ZoneId ZONE_ID_BEIJING = ZoneId.of("+08:00");
+
     public static boolean isValidDate(int year, int month, int day) {
         if (month < 1 || month > 12) {
             return false;
@@ -156,7 +158,6 @@ public class DateTimeUtil {
                                     int day) {
         return ymdToSeconds(year, month, day, ZONE_ID_GMT);
     }
-
     //========================================//
 
     public static long localDateTimeToMills(LocalDateTime localDateTime, ZoneId zoneId) {
@@ -308,6 +309,30 @@ public class DateTimeUtil {
 
     public static Long ymdStringToSeconds(String s) {
         return ymdStringToSeconds(s, DEFAULT_SEPARATOR, ZONE_ID_GMT);
+    }
+
+    /**
+     * 数字转为时间戳
+     *
+     * @param ymdNumber 日期数字，如 20200101表示2020年1月1日
+     * @param zoneId    时区
+     * @return 时间戳
+     */
+    public static Long ymdNumberToSeconds(int ymdNumber, ZoneId zoneId) {
+        int y;
+        int m;
+        int d;
+
+        d = ymdNumber % 100;
+        ymdNumber /= 100;
+        m = ymdNumber % 100;
+        y = ymdNumber / 100;
+
+        return ymdToSeconds(y, m, d, zoneId);
+    }
+
+    public static Long ymdNumberToSeconds(int ymdNumber) {
+        return ymdNumberToSeconds(ymdNumber, ZONE_ID_GMT);
     }
 
     public static String millsToYmdString(Long mills, String separator, ZoneId zoneId) {
