@@ -13,9 +13,6 @@ public class TimePage<T> {
 
     private List<T> items;
 
-    private TimePage() {
-    }
-
     public static <E> TimePage<E> of(long pageSize, long timestamp, long total, List<E> items) {
         if (pageSize <= 0) {
             throw new IllegalArgumentException("pageSize must greater than 0");
@@ -31,6 +28,22 @@ public class TimePage<T> {
             page.items = new ArrayList<>(items);
         }
         return page;
+    }
+
+    public void setTotal(long total) {
+        this.total = total;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public void setPageSize(long pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public void setItems(List<T> items) {
+        this.items = items;
     }
 
     public long getTotal() {

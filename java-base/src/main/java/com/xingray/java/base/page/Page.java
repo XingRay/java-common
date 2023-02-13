@@ -13,9 +13,6 @@ public class Page<T> {
 
     private List<T> items;
 
-    private Page() {
-    }
-
     public static <E> Page<E> of(long pageIndex, long pageSize, long total, List<E> items) {
         if (pageIndex <= 0) {
             throw new IllegalArgumentException("pageIndex must greater than 0");
@@ -36,6 +33,22 @@ public class Page<T> {
         }
 
         return page;
+    }
+
+    public void setTotal(long total) {
+        this.total = total;
+    }
+
+    public void setPageIndex(long pageIndex) {
+        this.pageIndex = pageIndex;
+    }
+
+    public void setPageSize(long pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public void setItems(List<T> items) {
+        this.items = items;
     }
 
     public long getTotal() {
