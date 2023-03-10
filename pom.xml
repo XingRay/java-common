@@ -14,6 +14,7 @@
         <module>java-collection</module>
         <module>java-config</module>
         <module>java-command</module>
+        <module>java-installer</module>
     </modules>
 
     <properties>
