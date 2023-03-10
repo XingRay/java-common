@@ -13,6 +13,7 @@
         <module>java-util</module>
         <module>java-collection</module>
         <module>java-config</module>
+        <module>java-command</module>
     </modules>
 
     <properties>
