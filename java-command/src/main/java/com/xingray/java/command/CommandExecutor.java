@@ -3,37 +3,48 @@ package com.xingray.java.command;
 import java.io.File;
 
 public interface CommandExecutor {
-    CommandResult executeSplitCmd(String[] splitCmd, String[] environmentParams, File dir) throws Exception;
+    int execute(String[] cmd, String[] environmentParams, File dir, ExecuteListener listener);
 
-    default CommandResult executeSplitCmd(String[] splitCmd, File dir) throws Exception {
-        return executeSplitCmd(splitCmd, null, dir);
+    default int execute(String[] cmd, File dir, ExecuteListener listener) {
+        return execute(cmd, null, dir, listener);
     }
 
-    default CommandResult executeSplitCmd(String[] splitCmd) throws Exception {
-        return executeSplitCmd(splitCmd, null, null);
+    default int execute(String[] splitCmd, ExecuteListener listener) {
+        return execute(splitCmd, null, null, listener);
+    }
+    default int execute(String[] splitCmd) {
+        return execute(splitCmd, null, null, null);
     }
 
-    default CommandResult execute(String cmd, String[] environmentParams, File dir) throws Exception {
-        return executeSplitCmd(CommandUtil.splitCmd(cmd), environmentParams, dir);
+    default int execute(String cmd, String[] environmentParams, File dir, ExecuteListener listener) {
+        return execute(CommandUtil.splitCmd(cmd), environmentParams, dir, listener);
     }
 
-    default CommandResult execute(String cmd, File dir) throws Exception {
-        return execute(cmd, null, dir);
+    default int execute(String cmd, File dir, ExecuteListener listener) {
+        return execute(cmd, null, dir, listener);
     }
 
-    default CommandResult execute(String cmd) throws Exception {
-        return execute(cmd, null, null);
+    default int execute(String cmd, ExecuteListener listener){
+        return execute(cmd, null, null, listener);
     }
 
-    default CommandResult executeCommand(Object command, String[] environmentParams, File dir) throws Exception {
-        return executeSplitCmd(CommandUtil.commandToStringArray(command), environmentParams, dir);
+    default int execute(String cmd ){
+        return execute(cmd, null, null, null);
     }
 
-    default CommandResult executeCommand(Object command, File dir) throws Exception {
-        return executeCommand(command, null, dir);
+    default int execute(Object command, String[] environmentParams, File dir, ExecuteListener listener) throws IllegalAccessException {
+        return execute(CommandUtil.commandToStringArray(command), environmentParams, dir, listener);
     }
 
-    default CommandResult executeCommand(Object command) throws Exception {
-        return executeCommand(command, null, null);
+    default int execute(Object command, File dir, ExecuteListener listener) throws Exception {
+        return execute(command, null, dir, listener);
+    }
+
+    default int execute(Object command, ExecuteListener listener) throws Exception {
+        return execute(command, null, null, listener);
+    }
+
+    default int execute(Object command) throws Exception {
+        return execute(command, null, null, null);
     }
 }

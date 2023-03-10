@@ -1,88 +1,83 @@
 package com.xingray.java.command;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.InputStreamReader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.*;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
-import java.util.List;
 import java.util.function.Consumer;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class JavaRuntimeCommandExecutor implements CommandExecutor {
 
-    private Charset charset;
-    private Consumer<String> consumer;
+    private static final Logger logger = LoggerFactory.getLogger(JavaRuntimeCommandExecutor.class);
 
+    private final Charset charset;
+
+    public JavaRuntimeCommandExecutor(Charset charset) {
+        this.charset = charset;
+    }
 
     public JavaRuntimeCommandExecutor() {
-        this(null, null);
-    }
-
-    public JavaRuntimeCommandExecutor(Charset charset, Consumer<String> consumer) {
-        this.charset = charset;
-        this.consumer = consumer;
-    }
-
-    public void setCharset(Charset charset) {
-        this.charset = charset;
-    }
-
-    public void setConsumer(Consumer<String> consumer) {
-        this.consumer = consumer;
+        this(StandardCharsets.UTF_8);
     }
 
     @Override
-    public CommandResult executeSplitCmd(String[] splitCmd, String[] environmentParams, File dir) throws Exception {
+    public int execute(String[] cmd, String[] environmentParams, File dir, ExecuteListener listener) {
+        logger.info("splitCmd:{}, environmentParams:{}, dir:{}", Arrays.toString(cmd), Arrays.toString(environmentParams), dir);
 
-        BufferedReader inputBufferedReader = null;
-        BufferedReader errorBufferedReader = null;
         try {
-            System.out.println("splitCmd:" + Arrays.toString(splitCmd) + "\n"
-                    + "environmentParams:" + Arrays.toString(environmentParams) + "\n"
-                    + "dir:" + dir);
+            Process process = Runtime.getRuntime().exec(cmd, environmentParams, dir);
+            read(process.getInputStream(), charset, new Consumer<String>() {
+                @Override
+                public void accept(String s) {
+                    logger.info("process.getInputStream():{}", s);
+                    if (listener != null) {
+                        listener.out(s);
+                    }
+                }
+            });
 
-            Process process = Runtime.getRuntime().exec(splitCmd, environmentParams, dir);
-            InputStreamReader inInputStreamReader;
-            if (charset != null) {
-                inInputStreamReader = new InputStreamReader(process.getInputStream(), charset);
-            } else {
-                inInputStreamReader = new InputStreamReader(process.getInputStream());
-            }
-
-            inputBufferedReader = new BufferedReader(inInputStreamReader);
-            Stream<String> inputStream = inputBufferedReader.lines();
-            if (consumer != null) {
-                inputStream = inputStream.peek(consumer);
-            }
-            List<String> resultStringList = inputStream.collect(Collectors.toList());
-
-            InputStreamReader errorInputStreamReader;
-            if (charset != null) {
-                errorInputStreamReader = new InputStreamReader(process.getErrorStream(), charset);
-            } else {
-                errorInputStreamReader = new InputStreamReader(process.getErrorStream());
-            }
-            errorBufferedReader = new BufferedReader(errorInputStreamReader);
-            Stream<String> errorStream = errorBufferedReader.lines();
-            if (consumer != null) {
-                errorStream = errorStream.peek(consumer);
-            }
-            List<String> errorStringList = errorStream.collect(Collectors.toList());
+            read(process.getErrorStream(), charset, new Consumer<String>() {
+                @Override
+                public void accept(String s) {
+                    logger.info("process.getErrorStream():{}", s);
+                    if (listener != null) {
+                        listener.error(s);
+                    }
+                }
+            });
 
             process.waitFor();
             int exitValue = process.exitValue();
+            logger.info("process.exitValue():{}", exitValue);
             process.destroy();
-
-            return new CommandResult(exitValue, resultStringList, errorStringList);
-        } finally {
-            if (inputBufferedReader != null) {
-                inputBufferedReader.close();
+            if (listener != null) {
+                listener.onFinish(exitValue);
             }
-            if (errorBufferedReader != null) {
-                errorBufferedReader.close();
+            return exitValue;
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error(e.getMessage());
+            if (listener != null) {
+                listener.onError(e);
             }
+            return -1;
         }
+    }
+
+    public void read(InputStream inputStream, Charset charset, Consumer<String> consumer) throws IOException {
+        InputStreamReader inInputStreamReader;
+        if (charset != null) {
+            inInputStreamReader = new InputStreamReader(inputStream, charset);
+        } else {
+            inInputStreamReader = new InputStreamReader(inputStream);
+        }
+
+        BufferedReader inputBufferedReader = new BufferedReader(inInputStreamReader);
+        inputBufferedReader.lines().forEach(consumer);
+        inInputStreamReader.close();
+        inputStream.close();
     }
 }
