@@ -1,13 +1,14 @@
 package com.xingray.java.util;
 
 
-
 import com.xingray.java.base.interfaces.Mapper;
+import com.xingray.java.util.collection.CollectionUtil;
 
 import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 
 public class FileUtil {
@@ -149,7 +150,7 @@ public class FileUtil {
         boolean rename = srcFile.renameTo(destFile);
         if (!rename) {
             copyFile(srcFile.getAbsolutePath(), destFile.getAbsolutePath());
-            deleteFile(srcFile.getAbsolutePath());
+            deleteFileRecursive(srcFile);
         }
     }
 
@@ -385,40 +386,38 @@ public class FileUtil {
         return (dire.exists() && dire.isDirectory());
     }
 
-    /**
-     * delete file or directory
-     * <ul>
-     * <li>if path is null or empty, return true</li>
-     * <li>if path not exist, return true</li>
-     * <li>if path exist, delete recursion. return true</li>
-     * <ul>
-     *
-     * @param path
-     * @return
-     */
-    public static boolean deleteFile(String path) {
-        if (StringUtil.isEmpty(path)) {
-            return true;
-        }
+    public static boolean deleteFileRecursive(File file) {
+        return deleteFileRecursive(file, null);
+    }
 
-        File file = new File(path);
+    public static boolean deleteFileRecursive(File file, Consumer<File> callback) {
         if (!file.exists()) {
             return true;
         }
+
         if (file.isFile()) {
+            if (callback != null) {
+                callback.accept(file);
+            }
             return file.delete();
         }
-        if (!file.isDirectory()) {
-            return false;
-        }
-        for (File f : file.listFiles()) {
-            if (f.isFile()) {
-                f.delete();
-            } else if (f.isDirectory()) {
-                deleteFile(f.getAbsolutePath());
+
+        if (file.isDirectory()) {
+            File[] files = file.listFiles();
+            if (!CollectionUtil.isEmpty(files)) {
+                for (File childFile : files) {
+                    if (!deleteFileRecursive(childFile, callback)) {
+                        return false;
+                    }
+                }
             }
+            if (callback != null) {
+                callback.accept(file);
+            }
+            return file.delete();
         }
-        return file.delete();
+
+        return false;
     }
 
     /**
