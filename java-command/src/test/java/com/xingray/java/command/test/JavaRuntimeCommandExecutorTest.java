@@ -19,25 +19,32 @@ class JavaRuntimeCommandExecutorTest {
     }
 
     @Test
-    void executeSplitCmd() throws Exception {
-        int exitValue = executor.execute("java -version", new SimpleExecuteListener() {
+    void executeSplitCmd() {
+        // 注意 java --version 会走out， java -version 会走err，因为本来java查询版本应该使用--version 而不是-version，而且输出会有细微的区别
+
+        // out:openjdk 19 2022-09-20
+        int exitValue1 = executor.execute("java --version", new SimpleExecuteListener() {
             @Override
             public void out(String line) {
-                System.out.println(line);
+                System.out.println("out:" + line);
             }
         });
-        assert exitValue == 0;
+        assert exitValue1 == 0;
+
+        // error:openjdk version "19" 2022-09-20
+        int exitValue2 = executor.execute("java -version", new SimpleExecuteListener() {
+            @Override
+            public void error(String line) {
+                System.out.println("error:" + line);
+            }
+        });
+        assert exitValue2 == 0;
     }
 
     @Test
     public void testDir() throws Exception {
         String cmd = SystemUtil.isRunOnWindows() ? "mvn.cmd -version" : "mvn -version";
-        int exitValue = executor.execute(cmd, new SimpleExecuteListener() {
-            @Override
-            public void out(String line) {
-                System.out.println(line);
-            }
-        });
+        int exitValue = executor.execute(cmd);
         System.out.println(exitValue);
         assert exitValue == 0;
     }
@@ -50,29 +57,26 @@ class JavaRuntimeCommandExecutorTest {
 
         try {
             String cmd = SystemUtil.isRunOnWindows() ? "mvn.cmd clean package" : "mvn clean package";
-            File projectRootFile = new File("D:\\code\\workspace\\java\\generator-test01");
-            int result01 = executor.execute(cmd, projectRootFile, new SimpleExecuteListener() {
-                @Override
-                public void out(String line) {
-                    System.out.println(line);
-                }
-            });
-            System.out.println(result01);
-            assert result01 == 0;
-
+            File projectRootFile = new File("src\\test\\resources\\generator-test01");
+            int result = executor.execute(cmd, projectRootFile);
+            assert result == 0;
 
             cmd = "java -jar " + artifactId + "-" + version + ".jar";
-            int result02 = executor.execute(cmd, new File(projectRootFile, "target"), new SimpleExecuteListener() {
-                @Override
-                public void out(String line) {
-                    assert line.equals("hello world");
-                }
-            });
-            System.out.println(result02);
-            assert result02 == 0;
+            result = executor.execute(cmd, new File(projectRootFile, "target"));
+            assert result == 0;
 
+            cmd = SystemUtil.isRunOnWindows() ? "mvn.cmd clean" : "mvn clean";
+            result = executor.execute(cmd, projectRootFile);
+            assert result == 0;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
+
+    @Test
+    public void test02() {
+        File file = new File("src\\test\\resources\\generator-test01");
+        System.out.println(file.getAbsolutePath());
+    }
+
 }

@@ -2,7 +2,10 @@ package com.xingray.java.command;
 
 public abstract class SimpleExecuteListener implements ExecuteListener{
 
-    public abstract void out(String line);
+    @Override
+    public void out(String line) {
+
+    }
 
     @Override
     public void error(String line) {

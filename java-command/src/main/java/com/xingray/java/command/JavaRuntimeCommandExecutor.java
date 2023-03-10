@@ -25,14 +25,14 @@ public class JavaRuntimeCommandExecutor implements CommandExecutor {
 
     @Override
     public int execute(String[] cmd, String[] environmentParams, File dir, ExecuteListener listener) {
-        logger.info("splitCmd:{}, environmentParams:{}, dir:{}", Arrays.toString(cmd), Arrays.toString(environmentParams), dir);
+        logger.info("splitCmd:{}\nenvironmentParams:{}\ndir:{}", Arrays.toString(cmd), Arrays.toString(environmentParams), dir);
 
         try {
             Process process = Runtime.getRuntime().exec(cmd, environmentParams, dir);
             read(process.getInputStream(), charset, new Consumer<String>() {
                 @Override
                 public void accept(String s) {
-                    logger.info("process.getInputStream():{}", s);
+                    logger.info(s);
                     if (listener != null) {
                         listener.out(s);
                     }
@@ -42,7 +42,7 @@ public class JavaRuntimeCommandExecutor implements CommandExecutor {
             read(process.getErrorStream(), charset, new Consumer<String>() {
                 @Override
                 public void accept(String s) {
-                    logger.info("process.getErrorStream():{}", s);
+                    logger.info(s);
                     if (listener != null) {
                         listener.error(s);
                     }
