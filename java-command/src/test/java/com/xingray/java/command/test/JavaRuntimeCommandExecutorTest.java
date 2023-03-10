@@ -1,8 +1,6 @@
 package com.xingray.java.command.test;
 
-import com.xingray.java.command.CommandExecutor;
-import com.xingray.java.command.JavaRuntimeCommandExecutor;
-import com.xingray.java.command.SimpleExecuteListener;
+import com.xingray.java.command.*;
 import com.xingray.java.util.SystemUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -77,6 +75,26 @@ class JavaRuntimeCommandExecutorTest {
     public void test02() {
         File file = new File("src\\test\\resources\\generator-test01");
         System.out.println(file.getAbsolutePath());
+    }
+
+    @Test
+    public void resultAllRecordTest() {
+        String cmd = "java --version";
+        RecordExecuteListener listener = new AllRecordExecuteListener("\n");
+        int result = executor.execute(cmd, listener);
+        assert result==0;
+        String record = listener.getRecord();
+        System.out.println("record:"+record);
+    }
+
+    @Test
+    public void resultLastRecordTest() {
+        String cmd = "java --version";
+        RecordExecuteListener listener = new LastRecordExecuteListener();
+        int result = executor.execute(cmd, listener);
+        assert result==0;
+        String record = listener.getRecord();
+        System.out.println("record:"+record);
     }
 
 }
