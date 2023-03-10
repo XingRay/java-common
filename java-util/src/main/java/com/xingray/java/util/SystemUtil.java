@@ -10,7 +10,7 @@ import java.util.Properties;
 public class SystemUtil {
 
     public static String openDirectory(String directoryPath) {
-        String osName = System.getProperty("os.name").toLowerCase();
+        String osName = getSystemName();
 
         if (osName.contains("windows")) {
             try {
@@ -97,5 +97,14 @@ public class SystemUtil {
         for (Map.Entry<String, String> entry : env.entrySet()) {
             System.out.println(entry.getKey() + ":" + entry.getValue());
         }
+    }
+
+    public static boolean isRunOnWindows() {
+        String osName = getSystemName();
+        return osName.contains("windows");
+    }
+
+    public static String getSystemName() {
+        return System.getProperty("os.name").toLowerCase();
     }
 }

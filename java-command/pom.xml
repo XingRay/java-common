@@ -17,6 +17,13 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.xingray</groupId>
+            <artifactId>java-util</artifactId>
+            <version>${java-common.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <scope>test</scope>

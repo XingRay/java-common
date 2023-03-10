@@ -3,6 +3,7 @@ package com.xingray.java.command.test;
 import com.xingray.java.command.CommandExecutor;
 import com.xingray.java.command.CommandResult;
 import com.xingray.java.command.JavaRuntimeCommandExecutor;
+import com.xingray.java.util.SystemUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -27,8 +28,7 @@ class JavaRuntimeCommandExecutorTest {
 
     @Test
     public void testDir() throws Exception {
-        String osName = System.getProperty("os.name").toLowerCase();
-        String cmd = osName.contains("windows") ? "mvn.cmd -version" : "mvn -version";
+        String cmd = SystemUtil.isRunOnWindows() ? "mvn.cmd -version" : "mvn -version";
         CommandResult result = executor.execute(cmd);
         int exitValue = result.getExitValue();
         System.out.println(exitValue);
