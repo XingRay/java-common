@@ -41,7 +41,7 @@ class JavaRuntimeCommandExecutorTest {
 
     @Test
     public void testDir() throws Exception {
-        String cmd = SystemUtil.isRunOnWindows() ? "mvn.cmd -version" : "mvn -version";
+        String cmd = "mvn -version";
         int exitValue = executor.execute(cmd);
         System.out.println(exitValue);
         assert exitValue == 0;
@@ -82,9 +82,9 @@ class JavaRuntimeCommandExecutorTest {
         String cmd = "java --version";
         RecordExecuteListener listener = new AllRecordExecuteListener("\n");
         int result = executor.execute(cmd, listener);
-        assert result==0;
+        assert result == 0;
         String record = listener.getRecord();
-        System.out.println("record:"+record);
+        System.out.println("record:" + record);
     }
 
     @Test
@@ -92,9 +92,8 @@ class JavaRuntimeCommandExecutorTest {
         String cmd = "java --version";
         RecordExecuteListener listener = new LastRecordExecuteListener();
         int result = executor.execute(cmd, listener);
-        assert result==0;
+        assert result == 0;
         String record = listener.getRecord();
-        System.out.println("record:"+record);
+        System.out.println("record:" + record);
     }
-
 }

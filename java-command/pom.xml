@@ -20,7 +20,6 @@
             <groupId>com.xingray</groupId>
             <artifactId>java-util</artifactId>
             <version>${java-common.version}</version>
-            <scope>test</scope>
         </dependency>
 
         <dependency>
