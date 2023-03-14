@@ -2,6 +2,7 @@ package com.xingray.java.command.test;
 
 import com.xingray.java.command.*;
 import com.xingray.java.util.SystemUtil;
+import com.xingray.java.util.TaskExecutor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -96,4 +97,22 @@ class JavaRuntimeCommandExecutorTest {
         String record = listener.getRecord();
         System.out.println("record:" + record);
     }
+
+    @Test
+    public void testWget() {
+        String cmd = "wget -r -np -R *.htm* https://nexus.gluonhq.com/nexus/content/repositories/releases/com/gluonhq/charm-cloudlink-client/6.0.7/";
+        int result = executor.execute(cmd, new File("D:\\tmp\\maven"));
+        assert result == 0;
+    }
+
+    @Test
+    public void testReadExecutor() {
+        String cmd = "wget -r -np -R *.htm* https://nexus.gluonhq.com/nexus/content/repositories/releases/com/gluonhq/charm-cloudlink-client/6.0.7/";
+        JavaRuntimeCommandExecutor executor1 = new JavaRuntimeCommandExecutor();
+        executor1.setReadExecutor(TaskExecutor.ioPool());
+        int result = executor1.execute(cmd, new File("D:\\tmp\\maven"));
+        assert result == 0;
+    }
+
+
 }
