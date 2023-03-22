@@ -1,5 +1,7 @@
 package com.xingray.java.base.result;
 
+import java.util.function.Function;
+
 public class Result<T> {
 
     private final boolean success;
@@ -16,6 +18,18 @@ public class Result<T> {
 
     public static <V> Result<V> result(boolean success) {
         return success ? success() : failure();
+    }
+
+    public static <V, U> Result<V> of(Result<U> result) {
+        return new Result<>(result.isSuccess(), null, result.getCode(), result.getMessage(), result.getException());
+    }
+
+    public static <V, U> Result<V> of(Result<U> result, Function<U, V> mapper) {
+        V data = null;
+        if (result.isSuccess()) {
+            data = mapper.apply(result.getData());
+        }
+        return new Result<>(result.isSuccess(), data, result.getCode(), result.getMessage(), result.getException());
     }
 
     public static <V> Result<V> success() {

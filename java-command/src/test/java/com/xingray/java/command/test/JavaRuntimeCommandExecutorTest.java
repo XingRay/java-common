@@ -114,5 +114,11 @@ class JavaRuntimeCommandExecutorTest {
         assert result == 0;
     }
 
+    @Test
+    public void testRunExe() {
+        String cmd = "D:\\code\\demo\\javafx\\javafx-graalvm\\target\\gluonfx\\x86_64-windows\\javafx-graalvm.exe";
+        int result = executor.execute(cmd);
+        assert result == 0;
+    }
 
 }

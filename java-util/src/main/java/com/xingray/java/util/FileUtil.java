@@ -6,9 +6,16 @@ import com.xingray.java.util.collection.CollectionUtil;
 
 import java.io.*;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
+
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 
 public class FileUtil {
@@ -508,6 +515,27 @@ public class FileUtil {
             file.createNewFile();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public static void extractZipFile(File srcZipFile, File targetDir, Predicate<ZipEntry> filter) throws IOException {
+        if (!srcZipFile.exists()) {
+            return;
+        }
+        if (!targetDir.exists()) {
+            targetDir.mkdirs();
+        }
+
+        try (ZipFile zipFile = new ZipFile(srcZipFile)) {
+            Enumeration<? extends ZipEntry> enumeration = zipFile.entries();
+            while (enumeration.hasMoreElements()) {
+                ZipEntry zipEntry = enumeration.nextElement();
+                if (!filter.test(zipEntry)) {
+                    continue;
+                }
+                InputStream inputStream = zipFile.getInputStream(zipEntry);
+                Files.copy(inputStream, targetDir.toPath().resolve(zipEntry.getName()), REPLACE_EXISTING);
+            }
         }
     }
 }
