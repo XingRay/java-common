@@ -2508,6 +2508,56 @@ public class CollectionUtil {
         return array;
     }
 
+    public static <T, R> R[] toArray(Iterable<T> iterable, Class<R> cls, Mapper<T, R> mapper) {
+        int size = size(iterable);
+        R[] array = (R[]) java.lang.reflect.Array.newInstance(cls, size);
+        return toArray(iterable, size, array, mapper);
+    }
+
+    public static <T, R> R[] toArray(Iterable<T> iterable, R[] array, Mapper<T, R> mapper) {
+        int size = size(iterable);
+        int arraySize = size(array);
+        return toArray(iterable, size, array, mapper);
+    }
+
+    private static <T, R> R[] toArray(Iterable<T> iterable, int size, R[] array, Mapper<T, R> mapper) {
+        if (size == 0) {
+            return array;
+        }
+        int index = 0;
+        for (T t : iterable) {
+            array[index] = mapper.map(t);
+            ++index;
+        }
+
+        return array;
+    }
+
+    public static <T, R> R[] toArray(Iterable<T> iterable, Class<R> cls, IndexMapper<T, R> mapper) {
+        int size = size(iterable);
+        R[] array = (R[]) java.lang.reflect.Array.newInstance(cls, size);
+        return toArray(iterable, size, array, mapper);
+    }
+
+    public static <T, R> R[] toArray(Iterable<T> iterable, R[] array, IndexMapper<T, R> mapper) {
+        int size = size(iterable);
+        int arraySize = size(array);
+        return toArray(iterable, size, array, mapper);
+    }
+
+    private static <T, R> R[] toArray(Iterable<T> iterable, int size, R[] array, IndexMapper<T, R> mapper) {
+        if (size == 0) {
+            return array;
+        }
+        int index = 0;
+        for (T t : iterable) {
+            array[index] = mapper.map(index, t);
+            ++index;
+        }
+
+        return array;
+    }
+
     public static IntRange[] splitToRanges(int from, int to, int rangeSize) {
         if (rangeSize <= 0) {
             throw new IllegalArgumentException();
