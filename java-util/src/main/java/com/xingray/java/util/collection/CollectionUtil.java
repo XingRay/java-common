@@ -12,6 +12,9 @@ import com.xingray.java.collection.series.LongSeries;
 import com.xingray.java.collection.series.Series;
 
 import java.util.*;
+import java.util.function.BiConsumer;
+import java.util.function.BiPredicate;
+import java.util.function.Predicate;
 
 /**
  * @author : leixing
@@ -2919,5 +2922,68 @@ public class CollectionUtil {
         }
 
         return doubleRange;
+    }
+
+
+    /**
+     * 将逻辑上具有树形结构关系的list组装为树形list
+     *
+     * @param all        原本只是逻辑上具有树形结构关系，但是数据上只是普通列表的list对象
+     * @param root       树形结构的根节点，本身不会添加到返回结果中，可以根据条件自行创建
+     * @param predicate  判断两个对象是否是逻辑上的父子节点，test(T t, U u); t是子节点，u是父节点就返回 true
+     * @param comparator 节点排序，null则不排序
+     * @param consumer   将children添加到 node 中，根据具体node的类型自行实现
+     * @param <T>        node的数据类型
+     * @return 树形结构的list
+     */
+    public static <T> List<T> listAsTree(List<T> all, T root, BiPredicate<T, T> predicate, Comparator<T> comparator, BiConsumer<T, List<T>> consumer) {
+        List<T> tree = filterAndDelete(all, root, predicate, comparator);
+        Queue<T> queue = new LinkedList<>(tree);
+        while (!queue.isEmpty()) {
+            T entity = queue.poll();
+            List<T> children = filterAndDelete(all, entity, predicate, comparator);
+            consumer.accept(entity, children);
+            queue.addAll(children);
+        }
+        return tree;
+    }
+
+    private static <T> List<T> filterAndDelete(Iterable<T> all, T node, BiPredicate<T, T> predicate, Comparator<T> comparator) {
+        List<T> children = null;
+        Iterator<T> iterator = all.iterator();
+        while (iterator.hasNext()) {
+            T t = iterator.next();
+            if (predicate.test(t, node)) {
+                if (children == null) {
+                    children = new ArrayList<>();
+                }
+                children.add(t);
+                iterator.remove();
+            }
+        }
+        if (children == null) {
+            return Collections.emptyList();
+        } else {
+            if (comparator != null) {
+                children.sort(comparator);
+            }
+            return children;
+        }
+    }
+
+    public static <T> List<T> filterAndDelete(Iterable<T> all, Predicate<T> predicate) {
+        List<T> children = null;
+        Iterator<T> iterator = all.iterator();
+        while (iterator.hasNext()) {
+            T t = iterator.next();
+            if (predicate.test(t)) {
+                if (children == null) {
+                    children = new ArrayList<>();
+                }
+                children.add(t);
+                iterator.remove();
+            }
+        }
+        return Objects.requireNonNullElse(children, Collections.emptyList());
     }
 }
