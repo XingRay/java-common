@@ -1,8 +1,13 @@
 package com.xingray.java.util;
 
 
+import java.lang.invoke.SerializedLambda;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class ObjectUtil {
@@ -169,5 +174,71 @@ public class ObjectUtil {
             }
         }
         return false;
+    }
+
+    public static <T> String columnToString(SFunction<T, ?> column) {
+        Method writeReplaceMethod = getInheritableMethod(column.getClass(), "writeReplace", null, Object.class);
+        if (writeReplaceMethod == null) {
+            return null;
+        }
+
+        try {
+            SerializedLambda serializedLambda = (SerializedLambda) writeReplaceMethod.invoke(column, (Object[]) null);
+            return methodToProperty(serializedLambda.getImplMethodName());
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static Method getInheritableMethod(Class<?> cl, String name,
+                                              Class<?>[] argTypes,
+                                              Class<?> returnType) {
+        Method meth = null;
+        Class<?> defCl = cl;
+        while (defCl != null) {
+            try {
+                meth = defCl.getDeclaredMethod(name, argTypes);
+                break;
+            } catch (NoSuchMethodException ex) {
+                defCl = defCl.getSuperclass();
+            }
+        }
+
+        if ((meth == null) || (meth.getReturnType() != returnType)) {
+            return null;
+        }
+        meth.setAccessible(true);
+        int mods = meth.getModifiers();
+        if ((mods & (Modifier.STATIC | Modifier.ABSTRACT)) != 0) {
+            return null;
+        } else if ((mods & (Modifier.PUBLIC | Modifier.PROTECTED)) != 0) {
+            return meth;
+        } else if ((mods & Modifier.PRIVATE) != 0) {
+            return (cl == defCl) ? meth : null;
+        } else {
+            return packageEquals(cl, defCl) ? meth : null;
+        }
+    }
+
+    public static boolean packageEquals(Class<?> cl1, Class<?> cl2) {
+        return cl1.getClassLoader() == cl2.getClassLoader() &&
+                cl1.getPackageName() == cl2.getPackageName();
+    }
+
+    public static String methodToProperty(String name) {
+        if (name.startsWith("is")) {
+            name = name.substring(2);
+        } else if (name.startsWith("get") || name.startsWith("set")) {
+            name = name.substring(3);
+        } else {
+            throw new RuntimeException("Error parsing property name '" + name + "'.  Didn't start with 'is', 'get' or 'set'.");
+        }
+
+        if (name.length() == 1 || (name.length() > 1 && !Character.isUpperCase(name.charAt(1)))) {
+            name = name.substring(0, 1).toLowerCase(Locale.ENGLISH) + name.substring(1);
+        }
+
+        return name;
     }
 }
