@@ -9,6 +9,10 @@ public final class InvokeResult<T, E> {
     private final String message;
     private final Throwable throwable;
 
+    public InvokeResult() {
+        this(CODE_SUCCESS, null, null, MESSAGE_SUCCESS_DEFAULT, null);
+    }
+
     public InvokeResult(int code, T data, E error, String message, Throwable throwable) {
         this.code = code;
         this.data = data;

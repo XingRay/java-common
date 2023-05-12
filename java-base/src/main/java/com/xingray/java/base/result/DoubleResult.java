@@ -9,6 +9,10 @@ public final class DoubleResult<T1, T2> {
     private final String message;
     private final Throwable throwable;
 
+    public DoubleResult() {
+        this(CODE_SUCCESS, null, null, MESSAGE_SUCCESS_DEFAULT, null);
+    }
+
     public DoubleResult(int code, T1 first, T2 second, String message, Throwable throwable) {
         this.code = code;
         this.first = first;

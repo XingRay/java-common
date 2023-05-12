@@ -8,6 +8,10 @@ public final class RemoteInvokeResult<T, E> {
     private final E error;
     private final String message;
 
+    public RemoteInvokeResult() {
+        this(CODE_SUCCESS, null, null, MESSAGE_SUCCESS_DEFAULT);
+    }
+
     public RemoteInvokeResult(int code, T data, E error, String message) {
         this.code = code;
         this.data = data;

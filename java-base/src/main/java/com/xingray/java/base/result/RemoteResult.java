@@ -7,6 +7,10 @@ public final class RemoteResult<T> {
     private final T data;
     private final String message;
 
+    public RemoteResult() {
+        this(CODE_SUCCESS, null, MESSAGE_SUCCESS_DEFAULT);
+    }
+
     public RemoteResult(int code, T data, String message) {
         this.code = code;
         this.data = data;

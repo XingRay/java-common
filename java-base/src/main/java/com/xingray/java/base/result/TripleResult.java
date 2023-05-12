@@ -10,6 +10,10 @@ public final class TripleResult<T1, T2, T3> {
     private final String message;
     private final Throwable throwable;
 
+    public TripleResult() {
+        this(CODE_SUCCESS, null, null, null, MESSAGE_SUCCESS_DEFAULT, null);
+    }
+
     public TripleResult(int code, T1 first, T2 second, T3 third, String message, Throwable throwable) {
         this.code = code;
         this.first = first;

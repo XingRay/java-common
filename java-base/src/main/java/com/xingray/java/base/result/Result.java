@@ -8,6 +8,10 @@ public final class Result<T> {
     private final String message;
     private final Throwable throwable;
 
+    public Result() {
+        this(CODE_SUCCESS, null, MESSAGE_SUCCESS_DEFAULT, null);
+    }
+
     public Result(int code, T data, String message, Throwable throwable) {
         this.code = code;
         this.data = data;
