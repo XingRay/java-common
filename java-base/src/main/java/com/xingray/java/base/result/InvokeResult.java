@@ -2,7 +2,7 @@ package com.xingray.java.base.result;
 
 import java.util.function.Function;
 
-public class InvokeResult<T, E> {
+public final class InvokeResult<T, E> {
     private final int code;
     private final T data;
     private final E error;
@@ -56,12 +56,12 @@ public class InvokeResult<T, E> {
     public static final String MESSAGE_SUCCESS_DEFAULT = "success";
     public static final int CODE_ERROR_DEFAULT = -1;
     public static final String MESSAGE_ERROR_DEFAULT = "error";
-    public static final InvokeResult<Object, Object> OK = new InvokeResult<>(CODE_SUCCESS, null, null, MESSAGE_SUCCESS_DEFAULT, null);
+    public static final InvokeResult<Object, Object> SUCCESS = new InvokeResult<>(CODE_SUCCESS, null, null, MESSAGE_SUCCESS_DEFAULT, null);
     public static final InvokeResult<Object, Object> ERROR = new InvokeResult<>(CODE_ERROR_DEFAULT, null, null, MESSAGE_ERROR_DEFAULT, null);
 
     public static <U, V> InvokeResult<U, V> success() {
         //noinspection unchecked
-        return (InvokeResult<U, V>) OK;
+        return (InvokeResult<U, V>) SUCCESS;
     }
 
     public static <U, V> InvokeResult<U, V> error() {
@@ -73,11 +73,11 @@ public class InvokeResult<T, E> {
         return success ? success() : error();
     }
 
-    public static <V, U, W> InvokeResult<V, W> of(InvokeResult<U, W> result) {
+    public static <V, U, W> InvokeResult<V, W> copyIgnoreData(InvokeResult<U, W> result) {
         return new InvokeResult<>(result.code, null, result.error, result.message, result.throwable);
     }
 
-    public static <V, U, W> InvokeResult<V, W> of(InvokeResult<U, W> result, Function<U, V> mapper) {
+    public static <V, U, W> InvokeResult<V, W> copy(InvokeResult<U, W> result, Function<U, V> mapper) {
         V data = null;
         if (result.isSuccess()) {
             data = mapper.apply(result.getData());

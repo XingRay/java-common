@@ -2,122 +2,104 @@ package com.xingray.java.base.result;
 
 import java.util.function.Function;
 
-public class Result<T> {
-
-    private final boolean success;
-    private final T data;
+public final class Result<T> {
     private final int code;
+    private final T data;
     private final String message;
-    private final Exception exception;
+    private final Throwable throwable;
 
-    public static final int ERROR_CODE_DEFAULT = -1;
-    public static final String MESSAGE_DEFAULT = "unknown error";
-
-    public static final Result<Object> OK = new Result<>(true);
-    public static final Result<Object> FAIL = new Result<>(false, null, ERROR_CODE_DEFAULT, MESSAGE_DEFAULT, null);
-
-    public static <V> Result<V> result(boolean success) {
-        return success ? success() : failure();
-    }
-
-    public static <V, U> Result<V> of(Result<U> result) {
-        return new Result<>(result.isSuccess(), null, result.getCode(), result.getMessage(), result.getException());
-    }
-
-    public static <V, U> Result<V> of(Result<U> result, Function<U, V> mapper) {
-        V data = null;
-        if (result.isSuccess()) {
-            data = mapper.apply(result.getData());
-        }
-        return new Result<>(result.isSuccess(), data, result.getCode(), result.getMessage(), result.getException());
-    }
-
-    public static <V> Result<V> success() {
-        //noinspection unchecked
-        return (Result<V>) OK;
-    }
-
-    public static <V> Result<V> success(V v) {
-        return new Result<>(true, v, 0, null, null);
-    }
-
-    public static <V> Result<V> failure() {
-        //noinspection unchecked
-        return (Result<V>) FAIL;
-    }
-
-    public static <V> Result<V> failure(int code, String message, Exception e) {
-        return new Result<>(code, message, e);
-    }
-
-    public static <V> Result<V> failure(int code) {
-        return failure(code, MESSAGE_DEFAULT, null);
-    }
-
-    public static <V> Result<V> failure(String message) {
-        return failure(ERROR_CODE_DEFAULT, message, null);
-    }
-
-    public static <V> Result<V> failure(int code, String message) {
-        return failure(code, message, null);
-    }
-
-    public static <V> Result<V> failure(Exception e) {
-        return failure(ERROR_CODE_DEFAULT, e.getMessage(), e);
-    }
-
-    public static <V> Result<V> failure(Result<?> result) {
-        return failure(result.getCode(), result.getMessage(), result.getException());
-    }
-
-    public Result() {
-        this(true, null, 0, null, null);
-    }
-
-    public Result(boolean success) {
-        this(success, null, success ? 0 : ERROR_CODE_DEFAULT, null, null);
-    }
-
-    public Result(int code, String message, Exception e) {
-        this(false, null, code, message, e);
-    }
-
-    public Result(boolean success, T data, int code, String message, Exception exception) {
-        this.data = data;
-        this.success = success;
-        this.message = message;
-        this.exception = exception;
+    public Result(int code, T data, String message, Throwable throwable) {
         this.code = code;
-    }
-
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public T getData() {
-        return data;
+        this.data = data;
+        this.message = message;
+        this.throwable = throwable;
     }
 
     public int getCode() {
         return code;
     }
 
+    public T getData() {
+        return data;
+    }
+
     public String getMessage() {
         return message;
     }
 
-    public Exception getException() {
-        return exception;
+    public Throwable getThrowable() {
+        return throwable;
     }
 
     @Override
     public String toString() {
         return "Result{" +
-                "success=" + success +
+                "code=" + code +
                 ", data=" + data +
-                ", code=" + code +
                 ", message='" + message + '\'' +
-                ", exception=" + exception +
+                ", throwable=" + throwable +
                 '}';
+    }
+
+    public boolean isSuccess() {
+        return code == CODE_SUCCESS;
+    }
+
+    public static final int CODE_SUCCESS = 0;
+    public static final String MESSAGE_SUCCESS_DEFAULT = "success";
+    public static final int CODE_ERROR_DEFAULT = -1;
+    public static final String MESSAGE_ERROR_DEFAULT = "error";
+    public static final Result<Object> SUCCESS = new Result<>(CODE_SUCCESS, null, MESSAGE_SUCCESS_DEFAULT, null);
+    public static final Result<Object> ERROR = new Result<>(CODE_ERROR_DEFAULT, null, MESSAGE_ERROR_DEFAULT, null);
+
+    public static <U> Result<U> success() {
+        //noinspection unchecked
+        return (Result<U>) SUCCESS;
+    }
+
+    public static <U> Result<U> error() {
+        //noinspection unchecked
+        return (Result<U>) ERROR;
+    }
+
+    public static <U> Result<U> result(boolean success) {
+        return success ? success() : error();
+    }
+
+    public static <V, U> Result<V> copyIgnoreData(Result<U> result) {
+        return new Result<>(result.code, null, result.message, result.throwable);
+    }
+
+    public static <V, U> Result<V> copy(Result<U> result, Function<U, V> mapper) {
+        V data = null;
+        U sourceData = result.getData();
+        if (sourceData != null) {
+            data = mapper.apply(sourceData);
+        }
+        return new Result<>(result.code, data, result.message, result.throwable);
+    }
+
+    public static <U> Result<U> success(U data) {
+        return new Result<>(CODE_SUCCESS, data, MESSAGE_SUCCESS_DEFAULT, null);
+    }
+
+    public static <U> Result<U> error(int code, String message, Throwable throwable) {
+        return new Result<>(code, null, message, throwable);
+    }
+
+    public static <U> Result<U> error(int code) {
+        return new Result<>(code, null, MESSAGE_ERROR_DEFAULT, null);
+    }
+
+    public static <U> Result<U> error(String message) {
+        return new Result<>(CODE_ERROR_DEFAULT, null, message, null);
+    }
+
+    public static <U> Result<U> error(int code, String message) {
+        return new Result<>(code, null, message, null);
+    }
+
+    public static <U> Result<U> error(Throwable throwable) {
+        return new Result<>(CODE_ERROR_DEFAULT, null, throwable.getMessage(), throwable);
     }
 }
