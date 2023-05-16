@@ -20,6 +20,9 @@ public class Containers {
     }
 
     public static <T> Container<Integer, T> of(T[] array) {
+        if (array == null || array.length == 0) {
+            return empty();
+        }
         Class<T> cls = findClass(array);
         if (cls == null) {
             throw new IllegalArgumentException();
@@ -35,6 +38,9 @@ public class Containers {
     }
 
     public static <T> Container<Integer, T> ofValues(T... values) {
+        if (values == null || values.length == 0) {
+            return empty();
+        }
         Class<T> cls = findClass(values);
         if (cls == null) {
             throw new IllegalArgumentException();
@@ -42,7 +48,7 @@ public class Containers {
         return ofValues(cls, values);
     }
 
-    public static <T> Container<Integer, T> ofValues(Class<T>cls, T... values) {
+    public static <T> Container<Integer, T> ofValues(Class<T> cls, T... values) {
         if (values == null || values.length == 0) {
             return empty();
         }
