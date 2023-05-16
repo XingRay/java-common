@@ -1,7 +1,7 @@
-package com.xingray.java.collection.array;
+package com.xingray.java.container.array;
 
 
-import com.xingray.java.collection.series.IntSeries;
+import com.xingray.java.container.series.DoubleSeries;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,20 +9,20 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class IntArray implements Iterable<Integer>, IntSeries {
+public class DoubleArray implements Iterable<Double>, DoubleSeries {
 
-    private final int[] array;
+    private final double[] array;
 
-    public IntArray(int[] array) {
+    public DoubleArray(double[] array) {
         this.array = array;
     }
 
-    public IntArray(int length) {
-        array = new int[length];
+    public DoubleArray(int length) {
+        array = new double[length];
     }
 
     @Override
-    public int get(int index) {
+    public double get(int index) {
         return array[index];
     }
 
@@ -31,50 +31,50 @@ public class IntArray implements Iterable<Integer>, IntSeries {
         return array.length;
     }
 
-    public void set(int index, int value) {
+    public void set(int index, double value) {
         array[index] = value;
     }
 
-    public List<Integer> toList() {
+    public List<Double> toList() {
         int length = length();
         if (length == 0) {
             return Collections.emptyList();
         }
-        ArrayList<Integer> list = new ArrayList<>(length);
-        for (int value : array) {
+        ArrayList<Double> list = new ArrayList<>(length);
+        for (double value : array) {
             list.add(value);
         }
         return list;
     }
 
-    public static IntArray of(int... values) {
+    public static DoubleArray of(double... values) {
         if (values == null) {
             return null;
         }
-        return new IntArray(values);
+        return new DoubleArray(values);
     }
 
     @Override
-    public Iterator<Integer> iterator() {
+    public Iterator<Double> iterator() {
         return new ArrayIterator(this);
     }
 
     @Override
-    public void forEach(Consumer<? super Integer> action) {
+    public void forEach(Consumer<? super Double> action) {
         if (array == null || array.length == 0) {
             return;
         }
-        for (int value : array) {
+        for (double value : array) {
             action.accept(value);
         }
     }
 
-    private static class ArrayIterator implements Iterator<Integer> {
+    private static class ArrayIterator implements Iterator<Double> {
 
-        private final IntArray array;
+        private final DoubleArray array;
         private int index;
 
-        public ArrayIterator(IntArray array) {
+        public ArrayIterator(DoubleArray array) {
             this.array = array;
         }
 
@@ -84,8 +84,8 @@ public class IntArray implements Iterable<Integer>, IntSeries {
         }
 
         @Override
-        public Integer next() {
-            int value = array.get(index);
+        public Double next() {
+            double value = array.get(index);
             index++;
             return value;
         }

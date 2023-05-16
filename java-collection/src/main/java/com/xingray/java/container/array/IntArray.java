@@ -1,7 +1,7 @@
-package com.xingray.java.collection.array;
+package com.xingray.java.container.array;
 
 
-import com.xingray.java.collection.series.LongSeries;
+import com.xingray.java.container.series.IntSeries;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,20 +9,20 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class LongArray implements Iterable<Long>, LongSeries {
+public class IntArray implements Iterable<Integer>, IntSeries {
 
-    private final long[] array;
+    private final int[] array;
 
-    public LongArray(long[] array) {
+    public IntArray(int[] array) {
         this.array = array;
     }
 
-    public LongArray(int length) {
-        array = new long[length];
+    public IntArray(int length) {
+        array = new int[length];
     }
 
     @Override
-    public long get(int index) {
+    public int get(int index) {
         return array[index];
     }
 
@@ -31,50 +31,50 @@ public class LongArray implements Iterable<Long>, LongSeries {
         return array.length;
     }
 
-    public void set(int index, long value) {
+    public void set(int index, int value) {
         array[index] = value;
     }
 
-    public List<Long> toList() {
+    public List<Integer> toList() {
         int length = length();
         if (length == 0) {
             return Collections.emptyList();
         }
-        ArrayList<Long> list = new ArrayList<>(length);
-        for (long value : array) {
+        ArrayList<Integer> list = new ArrayList<>(length);
+        for (int value : array) {
             list.add(value);
         }
         return list;
     }
 
-    public static LongArray of(long... values) {
+    public static IntArray of(int... values) {
         if (values == null) {
             return null;
         }
-        return new LongArray(values);
+        return new IntArray(values);
     }
 
     @Override
-    public Iterator<Long> iterator() {
+    public Iterator<Integer> iterator() {
         return new ArrayIterator(this);
     }
 
     @Override
-    public void forEach(Consumer<? super Long> action) {
+    public void forEach(Consumer<? super Integer> action) {
         if (array == null || array.length == 0) {
             return;
         }
-        for (long value : array) {
+        for (int value : array) {
             action.accept(value);
         }
     }
 
-    private static class ArrayIterator implements Iterator<Long> {
+    private static class ArrayIterator implements Iterator<Integer> {
 
-        private final LongArray array;
+        private final IntArray array;
         private int index;
 
-        public ArrayIterator(LongArray array) {
+        public ArrayIterator(IntArray array) {
             this.array = array;
         }
 
@@ -84,8 +84,8 @@ public class LongArray implements Iterable<Long>, LongSeries {
         }
 
         @Override
-        public Long next() {
-            long value = array.get(index);
+        public Integer next() {
+            int value = array.get(index);
             index++;
             return value;
         }

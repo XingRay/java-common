@@ -5,11 +5,11 @@ import com.xingray.java.base.interfaces.*;
 import com.xingray.java.base.range.DoubleRange;
 import com.xingray.java.base.range.IntRange;
 import com.xingray.java.base.range.LongRange;
-import com.xingray.java.collection.array.Array;
-import com.xingray.java.collection.series.DoubleSeries;
-import com.xingray.java.collection.series.IntSeries;
-import com.xingray.java.collection.series.LongSeries;
-import com.xingray.java.collection.series.Series;
+import com.xingray.java.container.array.Array;
+import com.xingray.java.container.series.DoubleSeries;
+import com.xingray.java.container.series.IntSeries;
+import com.xingray.java.container.series.LongSeries;
+import com.xingray.java.container.series.Series;
 
 import java.util.*;
 import java.util.function.BiConsumer;

@@ -1,4 +1,5 @@
-module com.xingray.java.collection {
-    exports com.xingray.java.collection.array;
-    exports com.xingray.java.collection.series;
+module com.xingray.java.container {
+    exports com.xingray.java.container.array;
+    exports com.xingray.java.container.series;
+    exports com.xingray.java.container.container;
 }

@@ -1,4 +1,4 @@
-package com.xingray.java.collection.series;
+package com.xingray.java.container.series;
 
 public interface Series<T> {
 

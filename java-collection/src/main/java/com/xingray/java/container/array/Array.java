@@ -1,7 +1,7 @@
-package com.xingray.java.collection.array;
+package com.xingray.java.container.array;
 
 
-import com.xingray.java.collection.series.Series;
+import com.xingray.java.container.series.Series;
 
 import java.util.*;
 import java.util.function.Consumer;
