@@ -30,4 +30,22 @@ public class ArrayContainerTest {
         System.out.println(s);
         assert s.equals("ccc");
     }
+
+    @Test
+    public void mergeTest() {
+        Container<Integer, String> sourceContainer = Containers.ofValues("a", "bb", "ccc");
+        System.out.println(sourceContainer);
+        Container<Integer, String> targetContainer = Containers.ofValues("dddd", "eeeee");
+        System.out.println(targetContainer);
+
+        Container<Integer, String> mergedContainer = sourceContainer.merge(targetContainer, null);
+        System.out.println(mergedContainer);
+        String[] array = mergedContainer.toArray();
+        assert array.length == 5;
+        assert array[0].equals("a");
+        assert array[1].equals("bb");
+        assert array[2].equals("ccc");
+        assert array[3].equals("dddd");
+        assert array[4].equals("eeeee");
+    }
 }

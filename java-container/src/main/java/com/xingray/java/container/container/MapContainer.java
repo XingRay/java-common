@@ -1,6 +1,7 @@
 package com.xingray.java.container.container;
 
 import java.util.*;
+import java.util.function.BiFunction;
 import java.util.function.Predicate;
 
 public class MapContainer<K, V> implements Container<K, V> {
@@ -85,5 +86,37 @@ public class MapContainer<K, V> implements Container<K, V> {
             return EmptyContainer.getInstance();
         }
         return new MapContainer<>(result);
+    }
+
+    @Override
+    public Container<K, V> merge(Container<K, V> container, BiFunction<V, V, V> biConsumer) {
+        if (container.isEmpty()) {
+            return new MapContainer<>(map);
+        }
+        HashMap<K, V> merged = new HashMap<>(map);
+        Map<K, V> target = container.toMap();
+        for (Map.Entry<K, V> entry : target.entrySet()) {
+            K key = entry.getKey();
+            V value = entry.getValue();
+            V mergedValue = merged.get(key);
+            if (mergedValue == null) {
+                merged.put(key, value);
+            } else {
+                merged.put(key, biConsumer.apply(mergedValue, value));
+            }
+        }
+        return new MapContainer<>(merged);
+    }
+
+    @Override
+    public Container<K, V> copy() {
+        return new MapContainer<>(map);
+    }
+
+    @Override
+    public String toString() {
+        return "MapContainer{" +
+                "map=" + map +
+                '}';
     }
 }

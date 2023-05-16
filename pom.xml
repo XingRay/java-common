@@ -11,7 +11,7 @@
     <modules>
         <module>java-base</module>
         <module>java-util</module>
-        <module>java-collection</module>
+        <module>java-container</module>
         <module>java-config</module>
         <module>java-command</module>
     </modules>
@@ -39,7 +39,7 @@
 
             <dependency>
                 <groupId>com.xingray</groupId>
-                <artifactId>java-collection</artifactId>
+                <artifactId>java-container</artifactId>
                 <version>${java-common.version}</version>
             </dependency>
 

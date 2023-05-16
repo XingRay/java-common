@@ -1,6 +1,7 @@
 package com.xingray.java.container.container;
 
 import java.util.*;
+import java.util.function.BiFunction;
 import java.util.function.Predicate;
 
 public final class ArrayContainer<T> implements Container<Integer, T> {
@@ -83,7 +84,33 @@ public final class ArrayContainer<T> implements Container<Integer, T> {
             return EmptyContainer.getInstance();
         }
         // noinspection unchecked
-        T[] array = (T[]) java.lang.reflect.Array.newInstance(cls, list.size());
-        return new ArrayContainer<>(list.toArray(array), cls);
+        T[] target = (T[]) java.lang.reflect.Array.newInstance(cls, list.size());
+        return new ArrayContainer<>(list.toArray(target), cls);
+    }
+
+    @Override
+    public Container<Integer, T> merge(Container<Integer, T> container, BiFunction<T, T, T> biConsumer) {
+        if (container.isEmpty()) {
+            return new ArrayContainer<>(array, cls);
+        }
+        // noinspection unchecked
+        T[] target = (T[]) java.lang.reflect.Array.newInstance(cls, size() + container.size());
+        System.arraycopy(array, 0, target, 0, array.length);
+        T[] mergeArray = container.toArray();
+        System.arraycopy(mergeArray, 0, target, array.length, mergeArray.length);
+        return new ArrayContainer<>(target, cls);
+    }
+
+    @Override
+    public Container<Integer, T> copy() {
+        return new ArrayContainer<>(array, cls);
+    }
+
+    @Override
+    public String toString() {
+        return "ArrayContainer{" +
+                "array=" + Arrays.toString(array) +
+                ", cls=" + cls +
+                '}';
     }
 }

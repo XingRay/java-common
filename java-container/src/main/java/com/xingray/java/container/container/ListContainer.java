@@ -1,6 +1,7 @@
 package com.xingray.java.container.container;
 
 import java.util.*;
+import java.util.function.BiFunction;
 import java.util.function.Predicate;
 
 public class ListContainer<T> implements Container<Integer, T> {
@@ -86,5 +87,30 @@ public class ListContainer<T> implements Container<Integer, T> {
             return EmptyContainer.getInstance();
         }
         return new ListContainer<>(result);
+    }
+
+    @Override
+    public Container<Integer, T> merge(Container<Integer, T> container, BiFunction<T, T, T> biConsumer) {
+        if (container.isEmpty()) {
+            return new ListContainer<>(list);
+        }
+        List<T> target = container.toList();
+
+        List<T> merged = new ArrayList<>(list.size() + target.size());
+        merged.addAll(list);
+        merged.addAll(target);
+        return new ListContainer<>(merged);
+    }
+
+    @Override
+    public Container<Integer, T> copy() {
+        return new ListContainer<>(list);
+    }
+
+    @Override
+    public String toString() {
+        return "ListContainer{" +
+                "list=" + list +
+                '}';
     }
 }

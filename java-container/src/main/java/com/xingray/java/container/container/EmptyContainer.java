@@ -1,19 +1,22 @@
 package com.xingray.java.container.container;
 
-import java.lang.reflect.Array;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.BiFunction;
 import java.util.function.Predicate;
 
-public final class EmptyArrayContainer<Index, Value> implements Container<Index, Value> {
+public final class EmptyContainer<Index, Value> implements Container<Index, Value> {
 
-    private final Class<Value> cls;
-    private Value[] array;
+    private static final EmptyContainer<Object, Object> INSTANCE = new EmptyContainer<>();
 
-    public EmptyArrayContainer(Class<Value> cls) {
-        this.cls = cls;
+    public static <K, V> EmptyContainer<K, V> getInstance() {
+        // noinspection unchecked
+        return (EmptyContainer<K, V>) INSTANCE;
+    }
+
+    private EmptyContainer() {
     }
 
     @Override
@@ -38,11 +41,7 @@ public final class EmptyArrayContainer<Index, Value> implements Container<Index,
 
     @Override
     public Value[] toArray() {
-        if (array == null) {
-            // noinspection unchecked
-            array = (Value[]) Array.newInstance(cls, 0);
-        }
-        return array;
+        throw new UnsupportedOperationException("consider to use ");
     }
 
     @Override
@@ -62,7 +61,17 @@ public final class EmptyArrayContainer<Index, Value> implements Container<Index,
 
     @Override
     public Container<Index, Value> findAll(Predicate<Value> predicate) {
-        // noinspection unchecked
+        //noinspection unchecked
+        return this;
+    }
+
+    @Override
+    public Container<Index, Value> merge(Container<Index, Value> container, BiFunction<Value, Value, Value> biConsumer) {
+        return container.copy();
+    }
+
+    @Override
+    public Container<Index, Value> copy() {
         return this;
     }
 }

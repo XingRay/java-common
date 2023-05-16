@@ -1,6 +1,7 @@
 package com.xingray.java.container.container;
 
 import java.util.*;
+import java.util.function.BiFunction;
 import java.util.function.Predicate;
 
 public class SetContainer<T> implements Container<T, T> {
@@ -85,5 +86,29 @@ public class SetContainer<T> implements Container<T, T> {
             return EmptyContainer.getInstance();
         }
         return new SetContainer<>(result);
+    }
+
+    @Override
+    public Container<T, T> merge(Container<T, T> container, BiFunction<T, T, T> biConsumer) {
+        if (container.isEmpty()) {
+            return new SetContainer<>(set);
+        }
+        Set<T> target = container.toSet();
+        Set<T> merged = new HashSet<>(set);
+        merged.addAll(target);
+
+        return new SetContainer<>(merged);
+    }
+
+    @Override
+    public Container<T, T> copy() {
+        return new SetContainer<>(set);
+    }
+
+    @Override
+    public String toString() {
+        return "SetContainer{" +
+                "set=" + set +
+                '}';
     }
 }

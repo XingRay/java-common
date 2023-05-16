@@ -1,6 +1,7 @@
 package com.xingray.java.container.container;
 
 import java.util.*;
+import java.util.function.BiFunction;
 import java.util.function.Predicate;
 
 public final class DoubleArrayContainer implements Container<Integer, Double> {
@@ -98,6 +99,28 @@ public final class DoubleArrayContainer implements Container<Integer, Double> {
             array[i] = list.get(i);
         }
 
+        return new DoubleArrayContainer(array);
+    }
+
+    @Override
+    public Container<Integer, Double> merge(Container<Integer, Double> container, BiFunction<Double, Double, Double> biConsumer) {
+        if (container.isEmpty()) {
+            return new DoubleArrayContainer(array);
+        }
+        double[] target = new double[size() + container.size()];
+        System.arraycopy(array, 0, target, 0, array.length);
+        Double[] containerArray = container.toArray();
+        double[] mergeArray = new double[containerArray.length];
+        for (int i = 0, containerArrayLength = containerArray.length; i < containerArrayLength; i++) {
+            Double value = containerArray[i];
+            mergeArray[i] = value;
+        }
+        System.arraycopy(mergeArray, 0, target, array.length, mergeArray.length);
+        return new DoubleArrayContainer(target);
+    }
+
+    @Override
+    public Container<Integer, Double> copy() {
         return new DoubleArrayContainer(array);
     }
 }

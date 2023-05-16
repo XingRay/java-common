@@ -1,6 +1,7 @@
 package com.xingray.java.container.container;
 
 import java.util.*;
+import java.util.function.BiFunction;
 import java.util.function.Predicate;
 
 public class LongArrayContainer implements Container<Integer, Long> {
@@ -98,6 +99,28 @@ public class LongArrayContainer implements Container<Integer, Long> {
             array[i] = list.get(i);
         }
 
+        return new LongArrayContainer(array);
+    }
+
+    @Override
+    public Container<Integer, Long> merge(Container<Integer, Long> container, BiFunction<Long, Long, Long> biConsumer) {
+        if (container.isEmpty()) {
+            return new LongArrayContainer(array);
+        }
+        long[] target = new long[size() + container.size()];
+        System.arraycopy(array, 0, target, 0, array.length);
+        Long[] containerArray = container.toArray();
+        long[] mergeArray = new long[containerArray.length];
+        for (int i = 0, containerArrayLength = containerArray.length; i < containerArrayLength; i++) {
+            Long value = containerArray[i];
+            mergeArray[i] = value;
+        }
+        System.arraycopy(mergeArray, 0, target, array.length, mergeArray.length);
+        return new LongArrayContainer(target);
+    }
+
+    @Override
+    public Container<Integer, Long> copy() {
         return new LongArrayContainer(array);
     }
 }

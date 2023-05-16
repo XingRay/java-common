@@ -1,0 +1,668 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="77c06065-b0f7-440f-89ee-6304758b7b44" name="Changes" comment="1. 实现Container">
+      <change afterPath="$PROJECT_DIR$/java-container/src/test/java/com/xingray/java/container/test/MapContainerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-collection/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/java-container/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-collection/src/main/java/com/xingray/java/container/array/Array.java" beforeDir="false" afterPath="$PROJECT_DIR$/java-container/src/main/java/com/xingray/java/container/array/Array.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-collection/src/main/java/com/xingray/java/container/array/DoubleArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/java-container/src/main/java/com/xingray/java/container/array/DoubleArray.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-collection/src/main/java/com/xingray/java/container/array/IntArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/java-container/src/main/java/com/xingray/java/container/array/IntArray.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-collection/src/main/java/com/xingray/java/container/array/LongArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/java-container/src/main/java/com/xingray/java/container/array/LongArray.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-collection/src/main/java/com/xingray/java/container/container/ArrayContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/java-container/src/main/java/com/xingray/java/container/container/ArrayContainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-collection/src/main/java/com/xingray/java/container/container/Container.java" beforeDir="false" afterPath="$PROJECT_DIR$/java-container/src/main/java/com/xingray/java/container/container/Container.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-collection/src/main/java/com/xingray/java/container/container/Containers.java" beforeDir="false" afterPath="$PROJECT_DIR$/java-container/src/main/java/com/xingray/java/container/container/Containers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-collection/src/main/java/com/xingray/java/container/container/DoubleArrayContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/java-container/src/main/java/com/xingray/java/container/container/DoubleArrayContainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-collection/src/main/java/com/xingray/java/container/container/EmptyArrayContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/java-container/src/main/java/com/xingray/java/container/container/EmptyArrayContainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-collection/src/main/java/com/xingray/java/container/container/EmptyContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/java-container/src/main/java/com/xingray/java/container/container/EmptyContainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-collection/src/main/java/com/xingray/java/container/container/ListContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/java-container/src/main/java/com/xingray/java/container/container/ListContainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-collection/src/main/java/com/xingray/java/container/container/LongArrayContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/java-container/src/main/java/com/xingray/java/container/container/LongArrayContainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-collection/src/main/java/com/xingray/java/container/container/MapContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/java-container/src/main/java/com/xingray/java/container/container/MapContainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-collection/src/main/java/com/xingray/java/container/container/SetContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/java-container/src/main/java/com/xingray/java/container/container/SetContainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-collection/src/main/java/com/xingray/java/container/series/DoubleSeries.java" beforeDir="false" afterPath="$PROJECT_DIR$/java-container/src/main/java/com/xingray/java/container/series/DoubleSeries.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-collection/src/main/java/com/xingray/java/container/series/IntSeries.java" beforeDir="false" afterPath="$PROJECT_DIR$/java-container/src/main/java/com/xingray/java/container/series/IntSeries.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-collection/src/main/java/com/xingray/java/container/series/LongSeries.java" beforeDir="false" afterPath="$PROJECT_DIR$/java-container/src/main/java/com/xingray/java/container/series/LongSeries.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-collection/src/main/java/com/xingray/java/container/series/Series.java" beforeDir="false" afterPath="$PROJECT_DIR$/java-container/src/main/java/com/xingray/java/container/series/Series.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-collection/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/java-container/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-collection/src/test/java/com/xingray/java/container/test/ArrayContainerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/java-container/src/test/java/com/xingray/java/container/test/ArrayContainerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-collection/src/test/java/com/xingray/java/container/test/ContainerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/java-container/src/test/java/com/xingray/java/container/test/ContainerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-collection/src/test/java/com/xingray/java/container/test/ListContainerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/java-container/src/test/java/com/xingray/java/container/test/ListContainerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-collection/src/test/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/java-container/src/test/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-util/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/java-util/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JUnit5 Test Class" />
+        <option value="Enum" />
+        <option value="Interface" />
+        <option value="module-info" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="D:\develop\maven\repository" />
+        <option name="mavenHome" value="$MAVEN_HOME$" />
+        <option name="useMavenConfig" value="true" />
+        <option name="userSettingsFile" value="D:\develop\maven\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="downloadAnnotationsAutomatically" value="true" />
+        <option name="downloadDocsAutomatically" value="true" />
+        <option name="downloadSourcesAutomatically" value="true" />
+        <option name="jdkForImporter" value="#JAVA_HOME" />
+        <option name="vmOptionsForImporter" value="-Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true -Dmaven.wagon.http.ssl.ignore.validity.dates=true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="MavenRunner">
+    <option name="jreName" value="#JAVA_HOME" />
+    <option name="skipTests" value="true" />
+    <option name="vmOptions" value="-Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true -Dmaven.wagon.http.ssl.ignore.validity.dates=true" />
+  </component>
+  <component name="ProjectId" id="2LE4BfFsL8RuYG05W0n3jhgVglH" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "jdk.selected.JAVA_MODULE": "19",
+    "last_opened_file_path": "D:/code/workspace/java/graalvm/gluonfx-maven-plugin",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.27931035",
+    "ruby.rails.projectView.checked": "true",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\code\git\github\java-common\java-installer\src\test\resources" />
+      <recent name="D:\code\git\github\java-common\java-installer\src\main\java\com\xingray\java\installer" />
+      <recent name="D:\code\git\github\java-common\java-command\src\test\resources" />
+      <recent name="D:\code\git\github\java-common\java-command\src\test\java\com\xingray\java\command\test" />
+      <recent name="D:\code\git\github\java-common\java-command\src\main\java\com\xingray\java\command" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.xingray.java.command" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.xingray.java.util" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.xingray.java.container.container" />
+      <recent name="com.xingray.java.collection.collection" />
+      <recent name="com.xingray.java.util" />
+      <recent name="com.xingray.java.base.result" />
+      <recent name="com.xingray.java.base" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.MapContainerTest.mergeTest">
+    <configuration name="ArrayContainerTest.findAllTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="java-container" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.xingray.java.container.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.xingray.java.container.test" />
+      <option name="MAIN_CLASS_NAME" value="com.xingray.java.container.test.ArrayContainerTest" />
+      <option name="METHOD_NAME" value="findAllTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ArrayContainerTest.findAllTest01" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="java-container" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.xingray.java.container.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.xingray.java.container.test" />
+      <option name="MAIN_CLASS_NAME" value="com.xingray.java.container.test.ArrayContainerTest" />
+      <option name="METHOD_NAME" value="findAllTest01" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ArrayContainerTest.findTest01" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="java-container" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.xingray.java.container.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.xingray.java.container.test" />
+      <option name="MAIN_CLASS_NAME" value="com.xingray.java.container.test.ArrayContainerTest" />
+      <option name="METHOD_NAME" value="findTest01" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ArrayContainerTest.mergeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="java-container" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.xingray.java.container.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.xingray.java.container.test" />
+      <option name="MAIN_CLASS_NAME" value="com.xingray.java.container.test.ArrayContainerTest" />
+      <option name="METHOD_NAME" value="mergeTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MapContainerTest.mergeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="java-container" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.xingray.java.container.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.xingray.java.container.test" />
+      <option name="MAIN_CLASS_NAME" value="com.xingray.java.container.test.MapContainerTest" />
+      <option name="METHOD_NAME" value="mergeTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.MapContainerTest.mergeTest" />
+        <item itemvalue="JUnit.ArrayContainerTest.mergeTest" />
+        <item itemvalue="JUnit.ArrayContainerTest.findTest01" />
+        <item itemvalue="JUnit.ArrayContainerTest.findAllTest01" />
+        <item itemvalue="JUnit.ArrayContainerTest.findAllTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="77c06065-b0f7-440f-89ee-6304758b7b44" name="Changes" comment="" />
+      <created>1675422773566</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1675422773566</updated>
+      <workItem from="1675422774665" duration="1170000" />
+      <workItem from="1675424017782" duration="575000" />
+      <workItem from="1675424615827" duration="1000" />
+      <workItem from="1675424667604" duration="72000" />
+      <workItem from="1675438718701" duration="1113000" />
+      <workItem from="1675508498461" duration="13000" />
+      <workItem from="1675509702086" duration="103000" />
+      <workItem from="1675521896744" duration="413000" />
+      <workItem from="1675523992357" duration="64000" />
+      <workItem from="1675543226509" duration="101000" />
+      <workItem from="1675544811276" duration="87000" />
+      <workItem from="1675549030111" duration="2219000" />
+      <workItem from="1675593593627" duration="14000" />
+      <workItem from="1675698185809" duration="253000" />
+      <workItem from="1675778966180" duration="2687000" />
+      <workItem from="1675785685246" duration="2004000" />
+      <workItem from="1675799989436" duration="237000" />
+      <workItem from="1675800277825" duration="1076000" />
+      <workItem from="1676295978152" duration="648000" />
+      <workItem from="1676339023936" duration="656000" />
+      <workItem from="1676712968761" duration="36000" />
+      <workItem from="1676713058002" duration="619000" />
+      <workItem from="1677899339967" duration="606000" />
+      <workItem from="1678424255840" duration="700000" />
+      <workItem from="1678424970160" duration="34000" />
+      <workItem from="1678425013995" duration="534000" />
+      <workItem from="1678425559862" duration="2000" />
+      <workItem from="1678430580062" duration="1845000" />
+      <workItem from="1678432433869" duration="133000" />
+      <workItem from="1678432669997" duration="24000" />
+      <workItem from="1678432788522" duration="172000" />
+      <workItem from="1678432972744" duration="15000" />
+      <workItem from="1678433060310" duration="65000" />
+      <workItem from="1678433133291" duration="4346000" />
+      <workItem from="1678438344874" duration="8734000" />
+      <workItem from="1678448156615" duration="194000" />
+      <workItem from="1678448360127" duration="23000" />
+      <workItem from="1678448554901" duration="1185000" />
+      <workItem from="1678450366432" duration="5000" />
+      <workItem from="1678452212026" duration="2162000" />
+      <workItem from="1678455654912" duration="3098000" />
+      <workItem from="1678459036491" duration="146000" />
+      <workItem from="1678459258738" duration="2703000" />
+      <workItem from="1678468141000" duration="2538000" />
+      <workItem from="1678470736038" duration="747000" />
+      <workItem from="1678503850346" duration="5686000" />
+      <workItem from="1678511669673" duration="3146000" />
+      <workItem from="1678520290285" duration="17000" />
+      <workItem from="1678524569131" duration="67000" />
+      <workItem from="1678525217042" duration="100000" />
+      <workItem from="1678620890725" duration="16000" />
+      <workItem from="1678621300598" duration="104000" />
+      <workItem from="1678621480181" duration="635000" />
+      <workItem from="1678627488396" duration="23000" />
+      <workItem from="1678778107083" duration="7083000" />
+      <workItem from="1678785910815" duration="83000" />
+      <workItem from="1678786005317" duration="944000" />
+      <workItem from="1678900188732" duration="65000" />
+      <workItem from="1678900290437" duration="54000" />
+      <workItem from="1678994313995" duration="1452000" />
+      <workItem from="1679055845161" duration="698000" />
+      <workItem from="1679130468195" duration="46000" />
+      <workItem from="1679130863682" duration="82000" />
+      <workItem from="1679131135480" duration="116000" />
+      <workItem from="1679156637850" duration="478000" />
+      <workItem from="1679157128842" duration="320000" />
+      <workItem from="1679157724367" duration="600000" />
+      <workItem from="1679369689707" duration="76000" />
+      <workItem from="1679390115761" duration="32000" />
+      <workItem from="1679493490849" duration="872000" />
+      <workItem from="1679496855253" duration="480000" />
+      <workItem from="1681194904965" duration="1323000" />
+      <workItem from="1681203792070" duration="321000" />
+      <workItem from="1681720571748" duration="2629000" />
+      <workItem from="1683787066345" duration="12000" />
+      <workItem from="1683885075608" duration="824000" />
+      <workItem from="1683886051576" duration="2345000" />
+      <workItem from="1683888416225" duration="3888000" />
+      <workItem from="1683908248470" duration="336000" />
+      <workItem from="1683908601792" duration="11000" />
+      <workItem from="1683912020425" duration="1001000" />
+      <workItem from="1683957606885" duration="56000" />
+      <workItem from="1684083665414" duration="1938000" />
+      <workItem from="1684227253737" duration="12054000" />
+      <workItem from="1684243644883" duration="1501000" />
+      <workItem from="1684245160360" duration="2283000" />
+    </task>
+    <task id="LOCAL-00001" summary="init">
+      <created>1675423472471</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1675423472471</updated>
+    </task>
+    <task id="LOCAL-00002" summary="1. add readme.md&#10;2. add LICENSE">
+      <created>1675424151928</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1675424151928</updated>
+    </task>
+    <task id="LOCAL-00003" summary="1. add Page">
+      <created>1675424580004</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1675424580004</updated>
+    </task>
+    <task id="LOCAL-00004" summary="1. exports Page">
+      <created>1675424718360</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1675424718360</updated>
+    </task>
+    <task id="LOCAL-00005" summary="1. CollectionUtil.java 添加删除匹配元素的方法">
+      <created>1675439810234</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1675439810234</updated>
+    </task>
+    <task id="LOCAL-00006" summary="1. 增加 TimePage">
+      <created>1675522257239</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1675522257239</updated>
+    </task>
+    <task id="LOCAL-00007" summary="1. 增加 TimePage#pageSize">
+      <created>1675524043918</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1675524043918</updated>
+    </task>
+    <task id="LOCAL-00008" summary="1. Page类中total类型更改为long">
+      <created>1675543310410</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1675543310410</updated>
+    </task>
+    <task id="LOCAL-00009" summary="1. Page类中pageIndex, pageSize 类型更改为long">
+      <created>1675544883399</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1675544883399</updated>
+    </task>
+    <task id="LOCAL-00010" summary="1. 优化Page类">
+      <created>1675551247372</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1675551247372</updated>
+    </task>
+    <task id="LOCAL-00011" summary="1. CollectionUtil.java 添加converter，(mapper)方法">
+      <created>1675781632867</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1675781632867</updated>
+    </task>
+    <task id="LOCAL-00012" summary="1. DateTimeUtil.java 添加数字日期到时间戳的转化">
+      <created>1675787994229</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1675787994229</updated>
+    </task>
+    <task id="LOCAL-00013" summary="1. page类添加接口">
+      <created>1676296011037</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1676296011037</updated>
+    </task>
+    <task id="LOCAL-00014" summary="1. FileUtil 添加删除文件方法">
+      <created>1678424909228</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1678424909228</updated>
+    </task>
+    <task id="LOCAL-00015" summary="1. 增加command模块">
+      <created>1678436900409</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1678436900409</updated>
+    </task>
+    <task id="LOCAL-00016" summary="1. command测试代码简化">
+      <created>1678437813340</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1678437813340</updated>
+    </task>
+    <task id="LOCAL-00017" summary="1. 优化command功能实现及接口">
+      <created>1678445567038</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1678445567038</updated>
+    </task>
+    <task id="LOCAL-00018" summary="1. 优化测试用例">
+      <created>1678447742354</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1678447742354</updated>
+    </task>
+    <task id="LOCAL-00019" summary="1. 优化版本管理">
+      <created>1678448252296</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1678448252296</updated>
+    </task>
+    <task id="LOCAL-00020" summary="1. 创建 java-installer 模块，定义jpackage 打包相关指令，通过 java-command 模块执行指令进行打包">
+      <created>1678455025858</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1678455025858</updated>
+    </task>
+    <task id="LOCAL-00021" summary="1. 增加保存输出值得回调">
+      <created>1678458750097</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1678458750097</updated>
+    </task>
+    <task id="LOCAL-00022" summary="1. 修改slf4j依赖方式">
+      <created>1678459177658</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1678459177658</updated>
+    </task>
+    <task id="LOCAL-00023" summary="1. 删除 installer 模块">
+      <created>1678471473214</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1678471473214</updated>
+    </task>
+    <task id="LOCAL-00024" summary="1. 完善指令执行流程，增加自动寻找执行器流程">
+      <created>1678514802504</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1678514802504</updated>
+    </task>
+    <task id="LOCAL-00025" summary="1. 删除废弃的类">
+      <created>1678525311828</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1678525311828</updated>
+    </task>
+    <task id="LOCAL-00026" summary="1. 优化 JavaRuntimeCommandExecutor 实现">
+      <created>1678785330588</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1678785330588</updated>
+    </task>
+    <task id="LOCAL-00027" summary="1. Result.java 增加转化方法&#10;2. FileUtil.java 增加解压zip文件方法">
+      <created>1679497278246</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1679497278246</updated>
+    </task>
+    <task id="LOCAL-00028" summary="1. CollectionUtil 增加 toArray 方法&#10;2. 增加测试类">
+      <created>1681204068277</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1681204068277</updated>
+    </task>
+    <task id="LOCAL-00029" summary="1. CollectionUtil 增加 listAsTree 方法">
+      <created>1681722594147</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1681722594147</updated>
+    </task>
+    <task id="LOCAL-00030" summary="1. 添加 InvokeResult.java">
+      <created>1683888350408</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1683888350408</updated>
+    </task>
+    <task id="LOCAL-00031" summary="1. 更新 Result 相关类">
+      <created>1683893342148</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1683893342148</updated>
+    </task>
+    <task id="LOCAL-00032" summary="1. ObjectUtil.java 添加根据getter/setter方法引用获取字段名的功能">
+      <created>1683908578729</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1683908578729</updated>
+    </task>
+    <task id="LOCAL-00033" summary="1. Result相关类添加空参构造">
+      <created>1683913413301</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1683913413301</updated>
+    </task>
+    <task id="LOCAL-00034" summary="1. 暂存">
+      <created>1684088028820</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1684088028820</updated>
+    </task>
+    <task id="LOCAL-00035" summary="1. 实现Container">
+      <created>1684240816799</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1684240816799</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="1. CollectionUtil.java 添加converter，(mapper)方法" />
+    <MESSAGE value="1. DateTimeUtil.java 添加数字日期到时间戳的转化" />
+    <MESSAGE value="1. page类添加接口" />
+    <MESSAGE value="1. FileUtil 添加删除文件方法" />
+    <MESSAGE value="1. 增加command模块" />
+    <MESSAGE value="1. command测试代码简化" />
+    <MESSAGE value="1. 优化command功能实现及接口" />
+    <MESSAGE value="1. 优化测试用例" />
+    <MESSAGE value="1. 优化版本管理" />
+    <MESSAGE value="1. 创建 java-installer 模块，定义jpackage 打包相关指令，通过 java-command 模块执行指令进行打包" />
+    <MESSAGE value="1. 增加保存输出值得回调" />
+    <MESSAGE value="1. 修改slf4j依赖方式" />
+    <MESSAGE value="1. 删除 installer 模块" />
+    <MESSAGE value="1. 完善指令执行流程，增加自动寻找执行器流程" />
+    <MESSAGE value="1. 删除废弃的类" />
+    <MESSAGE value="1. 优化 JavaRuntimeCommandExecutor 实现" />
+    <MESSAGE value="1. Result.java 增加转化方法&#10;2. FileUtil.java 增加解压zip文件方法" />
+    <MESSAGE value="1. CollectionUtil 增加 toArray 方法&#10;2. 增加测试类" />
+    <MESSAGE value="1. CollectionUtil 增加 listAsTree 方法" />
+    <MESSAGE value="1. 添加 InvokeResult.java" />
+    <MESSAGE value="1. 更新 Result 相关类" />
+    <MESSAGE value="1. ObjectUtil.java 添加根据getter/setter方法引用获取字段名的功能" />
+    <MESSAGE value="1. Result相关类添加空参构造" />
+    <MESSAGE value="1. 暂存" />
+    <MESSAGE value="1. 实现Container" />
+    <option name="LAST_COMMIT_MESSAGE" value="1. 实现Container" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$PROJECT_DIR$/../../../../develop/java/jdk/openjdk/jdk-19/lib/src.zip!/java.base/java/lang/ProcessImpl.java</url>
+          <line>435</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$PROJECT_DIR$/../../../../develop/java/jdk/openjdk/jdk-19/lib/src.zip!/java.base/java/lang/ProcessBuilder.java</url>
+          <line>1072</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$PROJECT_DIR$/../../../../develop/java/jdk/openjdk/jdk-19/lib/src.zip!/java.base/java/lang/ProcessImpl.java</url>
+          <line>105</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$PROJECT_DIR$/../../../../develop/java/jdk/openjdk/jdk-19/lib/src.zip!/java.base/java/lang/ProcessImpl.java</url>
+          <line>436</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$PROJECT_DIR$/../../../../develop/java/jdk/openjdk/jdk-19/lib/src.zip!/java.base/java/lang/ProcessBuilder.java</url>
+          <line>1086</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$PROJECT_DIR$/../../../../develop/java/jdk/openjdk/jdk-19/lib/src.zip!/java.base/java/lang/ProcessImpl.java</url>
+          <line>499</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$PROJECT_DIR$/../../../../develop/java/jdk/openjdk/jdk-19/lib/src.zip!/java.base/java/lang/ProcessEnvironment.java</url>
+          <line>239</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$PROJECT_DIR$/../../../../develop/java/jdk/openjdk/jdk-19/lib/src.zip!/java.base/java/lang/ProcessEnvironment.java</url>
+          <line>240</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$PROJECT_DIR$/../../../../develop/java/jdk/openjdk/jdk-19/lib/src.zip!/java.base/java/lang/ProcessEnvironment.java</url>
+          <line>238</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="sun.reflect.generics.tree.SimpleClassTypeSignature" memberName="typeArgs" />
+      </pinned-members>
+    </pin-to-top-manager>
+  </component>
+</project>
