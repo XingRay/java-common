@@ -1,7 +1,8 @@
 package com.xingray.java.container.array;
 
 
-import com.xingray.java.container.series.LongSeries;
+
+import com.xingray.java.container.interfaces.series.LongSeries;
 
 import java.util.ArrayList;
 import java.util.Collections;

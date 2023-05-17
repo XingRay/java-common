@@ -1,11 +1,11 @@
 package com.xingray.java.util;
 
 
-import com.xingray.java.base.interfaces.Mapper;
-import com.xingray.java.base.interfaces.Mapper2;
 
 import java.text.NumberFormat;
 import java.util.Map;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 
 public class StringUtil {
 
@@ -13,10 +13,32 @@ public class StringUtil {
         return s == null || s.isBlank() || s.trim().isEmpty();
     }
 
+    public static boolean hasText(String s) {
+        return (s != null && !s.isEmpty() && containsText(s));
+    }
+
+    public static boolean isEmpty(CharSequence s) {
+        return s == null || s.isEmpty();
+    }
+
+    public static boolean hasText(CharSequence charSequence) {
+        return charSequence != null && !charSequence.isEmpty() && containsText(charSequence);
+    }
+
+
+    private static boolean containsText(CharSequence str) {
+        int strLen = str.length();
+        for (int i = 0; i < strLen; i++) {
+            if (!Character.isWhitespace(str.charAt(i))) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     // ========================= Array =================================//
 
-    public static <T> String toString(T[] array, String sep, Mapper<T, String> mapper) {
+    public static <T> String toString(T[] array, String sep, Function<T, String> mapper) {
         if (array == null || array.length == 0) {
             return "";
         }
@@ -24,7 +46,7 @@ public class StringUtil {
         StringBuilder builder = new StringBuilder();
         boolean isFirst = true;
         for (T o : array) {
-            String s = o == null ? null : mapper == null ? o.toString() : mapper.map(o);
+            String s = o == null ? null : mapper == null ? o.toString() : mapper.apply(o);
             if (isEmpty(s)) {
                 continue;
             }
@@ -49,7 +71,7 @@ public class StringUtil {
 
     //  ========================== Iterable ===============================//
 
-    public static <T> String toString(Iterable<T> iterable, String sep, Mapper<T, String> mapper) {
+    public static <T> String toString(Iterable<T> iterable, String sep, Function<T, String> mapper) {
         if (iterable == null) {
             return "";
         }
@@ -57,7 +79,7 @@ public class StringUtil {
         StringBuilder builder = new StringBuilder();
         boolean isFirst = true;
         for (T o : iterable) {
-            String s = o == null ? null : mapper == null ? o.toString() : mapper.map(o);
+            String s = o == null ? null : mapper == null ? o.toString() : mapper.apply(o);
             if (isEmpty(s)) {
                 continue;
             }
@@ -82,7 +104,7 @@ public class StringUtil {
 
     //  ========================== Map ===============================//
 
-    public static <K, V> String toString(Map<K, V> map, String sep, Mapper2<K, V, String> mapper) {
+    public static <K, V> String toString(Map<K, V> map, String sep, BiFunction<K, V, String> mapper) {
         if (map == null || map.isEmpty()) {
             return "";
         }
@@ -92,7 +114,7 @@ public class StringUtil {
         for (Map.Entry<K, V> entry : map.entrySet()) {
             K key = entry.getKey();
             V value = entry.getValue();
-            String s = mapper == null ? key + ":" + value : mapper.map(key, value);
+            String s = mapper == null ? key + ":" + value : mapper.apply(key, value);
             if (isEmpty(s)) {
                 continue;
             }

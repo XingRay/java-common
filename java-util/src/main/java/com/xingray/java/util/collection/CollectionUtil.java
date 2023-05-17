@@ -1,19 +1,28 @@
 package com.xingray.java.util.collection;
 
 
-import com.xingray.java.base.interfaces.*;
-import com.xingray.java.base.range.DoubleRange;
-import com.xingray.java.base.range.IntRange;
-import com.xingray.java.base.range.LongRange;
-import com.xingray.java.container.array.Array;
-import com.xingray.java.container.series.DoubleSeries;
-import com.xingray.java.container.series.IntSeries;
-import com.xingray.java.container.series.LongSeries;
-import com.xingray.java.container.series.Series;
+import com.xingray.java.container.interfaces.series.DoubleSeries;
+import com.xingray.java.container.interfaces.series.IntSeries;
+import com.xingray.java.container.interfaces.series.LongSeries;
+import com.xingray.java.container.interfaces.series.Series;
+import com.xingray.java.interfaces.consumer.index.ObjectIndexConsumer;
+import com.xingray.java.interfaces.function.DoubleFunction;
+import com.xingray.java.interfaces.function.IntFunction;
+import com.xingray.java.interfaces.function.LongFunction;
+import com.xingray.java.interfaces.function.index.DoubleIndexFunction;
+import com.xingray.java.interfaces.function.index.IntIndexFunction;
+import com.xingray.java.interfaces.function.index.LongIndexFunction;
+import com.xingray.java.interfaces.function.index.ObjectIndexFunction;
+import com.xingray.java.interfaces.predicate.*;
+import com.xingray.java.util.ObjectUtil;
+import com.xingray.java.value.range.DoubleRange;
+import com.xingray.java.value.range.IntRange;
+import com.xingray.java.value.range.LongRange;
 
 import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.BiPredicate;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 /**
@@ -845,154 +854,154 @@ public class CollectionUtil {
         return -1;
     }
 
-    public static int indexOf(boolean[] array, Matcher<Boolean> matcher) {
-        return indexOf(array, 0, matcher);
+    public static int indexOf(boolean[] array, BooleanPredicate predicate) {
+        return indexOf(array, 0, predicate);
     }
 
-    public static int indexOf(boolean[] array, int startIndex, Matcher<Boolean> matcher) {
+    public static int indexOf(boolean[] array, int startIndex, BooleanPredicate predicate) {
         if (isOutOfIndex(array, startIndex)) {
             return -1;
         }
 
         for (int i = 0, size = array.length; i < size; i++) {
-            if (matcher.isMatch(array[i])) {
+            if (predicate.test(array[i])) {
                 return i;
             }
         }
         return -1;
     }
 
-    public static int indexOf(byte[] array, Matcher<Byte> matcher) {
-        return indexOf(array, 0, matcher);
+    public static int indexOf(byte[] array, BytePredicate predicate) {
+        return indexOf(array, 0, predicate);
     }
 
-    public static int indexOf(byte[] array, int startIndex, Matcher<Byte> matcher) {
+    public static int indexOf(byte[] array, int startIndex, BytePredicate predicate) {
         if (isOutOfIndex(array, startIndex)) {
             return -1;
         }
 
         for (int i = 0, size = array.length; i < size; i++) {
-            if (matcher.isMatch(array[i])) {
+            if (predicate.test(array[i])) {
                 return i;
             }
         }
         return -1;
     }
 
-    public static int indexOf(char[] array, Matcher<Character> matcher) {
-        return indexOf(array, 0, matcher);
+    public static int indexOf(char[] array, CharPredicate predicate) {
+        return indexOf(array, 0, predicate);
     }
 
-    public static int indexOf(char[] array, int startIndex, Matcher<Character> matcher) {
+    public static int indexOf(char[] array, int startIndex, CharPredicate matcher) {
         if (isOutOfIndex(array, startIndex)) {
             return -1;
         }
 
         for (int i = 0, size = array.length; i < size; i++) {
-            if (matcher.isMatch(array[i])) {
+            if (matcher.test(array[i])) {
                 return i;
             }
         }
         return -1;
     }
 
-    public static int indexOf(int[] array, Matcher<Integer> matcher) {
-        return indexOf(array, 0, matcher);
+    public static int indexOf(int[] array, IntPredicate predicate) {
+        return indexOf(array, 0, predicate);
     }
 
-    public static int indexOf(int[] array, int startIndex, Matcher<Integer> matcher) {
+    public static int indexOf(int[] array, int startIndex, IntPredicate predicate) {
         if (isOutOfIndex(array, startIndex)) {
             return -1;
         }
 
         for (int i = 0, size = array.length; i < size; i++) {
-            if (matcher.isMatch(array[i])) {
+            if (predicate.test(array[i])) {
                 return i;
             }
         }
         return -1;
     }
 
-    public static int indexOf(long[] array, Matcher<Long> matcher) {
-        return indexOf(array, 0, matcher);
+    public static int indexOf(long[] array, LongPredicate predicate) {
+        return indexOf(array, 0, predicate);
     }
 
-    public static int indexOf(long[] array, int startIndex, Matcher<Long> matcher) {
+    public static int indexOf(long[] array, int startIndex, LongPredicate predicate) {
         if (isOutOfIndex(array, startIndex)) {
             return -1;
         }
 
         for (int i = 0, size = array.length; i < size; i++) {
-            if (matcher.isMatch(array[i])) {
+            if (predicate.test(array[i])) {
                 return i;
             }
         }
         return -1;
     }
 
-    public static int indexOf(float[] array, Matcher<Float> matcher) {
-        return indexOf(array, 0, matcher);
+    public static int indexOf(float[] array, FloatPredicate predicate) {
+        return indexOf(array, 0, predicate);
     }
 
-    public static int indexOf(float[] array, int startIndex, Matcher<Float> matcher) {
+    public static int indexOf(float[] array, int startIndex, FloatPredicate predicate) {
         if (isOutOfIndex(array, startIndex)) {
             return -1;
         }
 
         for (int i = 0, size = array.length; i < size; i++) {
-            if (matcher.isMatch(array[i])) {
+            if (predicate.test(array[i])) {
                 return i;
             }
         }
         return -1;
     }
 
-    public static int indexOf(double[] array, Matcher<Double> matcher) {
-        return indexOf(array, 0, matcher);
+    public static int indexOf(double[] array, DoublePredicate predicate) {
+        return indexOf(array, 0, predicate);
     }
 
-    public static int indexOf(double[] array, int startIndex, Matcher<Double> matcher) {
+    public static int indexOf(double[] array, int startIndex, DoublePredicate predicate) {
         if (isOutOfIndex(array, startIndex)) {
             return -1;
         }
 
         for (int i = 0, size = array.length; i < size; i++) {
-            if (matcher.isMatch(array[i])) {
+            if (predicate.test(array[i])) {
                 return i;
             }
         }
         return -1;
     }
 
-    public static <T> int indexOf(T[] array, Matcher<T> matcher) {
-        return indexOf(array, 0, matcher);
+    public static <T> int indexOf(T[] array, Predicate<T> predicate) {
+        return indexOf(array, 0, predicate);
     }
 
-    public static <T> int indexOf(T[] array, int startIndex, Matcher<T> matcher) {
+    public static <T> int indexOf(T[] array, int startIndex, Predicate<T> predicate) {
         if (isOutOfIndex(array, startIndex)) {
             return -1;
         }
 
         for (int i = 0, size = array.length; i < size; i++) {
-            if (matcher.isMatch(array[i])) {
+            if (predicate.test(array[i])) {
                 return i;
             }
         }
         return -1;
     }
 
-    public static <T> int indexOf(Iterable<T> iterable, Matcher<T> matcher) {
-        return indexOf(iterable, 0, matcher);
+    public static <T> int indexOf(Iterable<T> iterable, Predicate<T> predicate) {
+        return indexOf(iterable, 0, predicate);
     }
 
-    public static <T> int indexOf(Iterable<T> iterable, int startIndex, Matcher<T> matcher) {
+    public static <T> int indexOf(Iterable<T> iterable, int startIndex, Predicate<T> predicate) {
         if (isOutOfIndex(iterable, startIndex)) {
             return -1;
         }
         if (iterable instanceof List && iterable instanceof RandomAccess) {
             List<T> list = (List<T>) iterable;
             for (int i = startIndex, size = list.size(); i < size; i++) {
-                if (matcher.isMatch(list.get(i))) {
+                if (predicate.test(list.get(i))) {
                     return i;
                 }
             }
@@ -1003,7 +1012,7 @@ public class CollectionUtil {
                 if (index < startIndex) {
                     continue;
                 }
-                if (matcher.isMatch(t)) {
+                if (predicate.test(t)) {
                     return index;
                 }
             }
@@ -1012,28 +1021,28 @@ public class CollectionUtil {
         return -1;
     }
 
-    public static <T> T find(T[] array, Matcher<T> matcher) {
-        return find(array, 0, matcher);
+    public static <T> T find(T[] array, Predicate<T> predicate) {
+        return find(array, 0, predicate);
     }
 
-    public static <T> T find(T[] array, int startIndex, Matcher<T> matcher) {
+    public static <T> T find(T[] array, int startIndex, Predicate<T> predicate) {
         if (isOutOfIndex(array, startIndex)) {
             return null;
         }
         for (int i = startIndex, size = array.length; i < size; i++) {
             T t = array[i];
-            if (matcher.isMatch(t)) {
+            if (predicate.test(t)) {
                 return t;
             }
         }
         return null;
     }
 
-    public static <T> T find(Iterable<T> iterable, Matcher<T> matcher) {
-        return find(iterable, 0, matcher);
+    public static <T> T find(Iterable<T> iterable, Predicate<T> predicate) {
+        return find(iterable, 0, predicate);
     }
 
-    public static <T> T find(Iterable<T> iterable, int startIndex, Matcher<T> matcher) {
+    public static <T> T find(Iterable<T> iterable, int startIndex, Predicate<T> matcher) {
         if (isOutOfIndex(iterable, startIndex)) {
             return null;
         }
@@ -1042,7 +1051,7 @@ public class CollectionUtil {
             List<T> list = (List<T>) iterable;
             for (int i = startIndex, size = list.size(); i < size; i++) {
                 T t = list.get(i);
-                if (matcher.isMatch(t)) {
+                if (matcher.test(t)) {
                     return t;
                 }
             }
@@ -1053,7 +1062,7 @@ public class CollectionUtil {
                 if (index < startIndex) {
                     continue;
                 }
-                if (matcher.isMatch(t)) {
+                if (matcher.test(t)) {
                     return t;
                 }
             }
@@ -1062,11 +1071,11 @@ public class CollectionUtil {
         return null;
     }
 
-    public static <T> SearchResult<T> find(T[][] array2, Matcher<T> matcher) {
-        return find(array2, 0, 0, matcher);
+    public static <T> SearchResult<T> find(T[][] array2, Predicate<T> predicate) {
+        return find(array2, 0, 0, predicate);
     }
 
-    public static <T> SearchResult<T> find(T[][] array2, int startIndex0, int startIndex1, Matcher<T> matcher) {
+    public static <T> SearchResult<T> find(T[][] array2, int startIndex0, int startIndex1, Predicate<T> predicate) {
         if (isOutOfIndex(array2, startIndex0)) {
             return null;
         }
@@ -1077,7 +1086,7 @@ public class CollectionUtil {
             }
             for (int index1 = startIndex1, size1 = array.length; index1 < size1; index1++) {
                 T t = array[index1];
-                if (matcher.isMatch(t)) {
+                if (predicate.test(t)) {
                     return new SearchResult<>(t, index0, index1);
                 }
             }
@@ -1085,11 +1094,11 @@ public class CollectionUtil {
         return null;
     }
 
-    public static <T> ArrayList<T> findAll(T[] array, Matcher<T> matcher) {
-        return findAll(array, 0, matcher);
+    public static <T> ArrayList<T> findAll(T[] array, Predicate<T> predicate) {
+        return findAll(array, 0, predicate);
     }
 
-    public static <T> ArrayList<T> findAll(T[] array, int startIndex, Matcher<T> matcher) {
+    public static <T> ArrayList<T> findAll(T[] array, int startIndex, Predicate<T> predicate) {
         ArrayList<T> result = new ArrayList<>();
 
         if (isOutOfIndex(array, startIndex)) {
@@ -1098,7 +1107,7 @@ public class CollectionUtil {
 
         for (int i = startIndex, size = array.length; i < size; i++) {
             T t = array[i];
-            if (matcher.isMatch(t)) {
+            if (predicate.test(t)) {
                 result.add(t);
             }
         }
@@ -1106,11 +1115,11 @@ public class CollectionUtil {
         return result;
     }
 
-    public static <T> ArrayList<T> findAll(Iterable<T> iterable, Matcher<T> matcher) {
-        return findAll(iterable, 0, matcher);
+    public static <T> ArrayList<T> findAll(Iterable<T> iterable, Predicate<T> predicate) {
+        return findAll(iterable, 0, predicate);
     }
 
-    public static <T> ArrayList<T> findAll(Iterable<T> iterable, int startIndex, Matcher<T> matcher) {
+    public static <T> ArrayList<T> findAll(Iterable<T> iterable, int startIndex, Predicate<T> predicate) {
         ArrayList<T> result = new ArrayList<>();
 
         if (isOutOfIndex(iterable, startIndex)) {
@@ -1121,7 +1130,7 @@ public class CollectionUtil {
             List<T> list = (List<T>) iterable;
             for (int i = startIndex, size = list.size(); i < size; i++) {
                 T t = list.get(i);
-                if (matcher.isMatch(t)) {
+                if (predicate.test(t)) {
                     result.add(t);
                 }
             }
@@ -1132,7 +1141,7 @@ public class CollectionUtil {
                 if (index < startIndex) {
                     continue;
                 }
-                if (matcher.isMatch(t)) {
+                if (predicate.test(t)) {
                     result.add(t);
                 }
             }
@@ -1141,14 +1150,14 @@ public class CollectionUtil {
         return result;
     }
 
-    public static <T> void filter(Iterable<T> iterable, Filter<T> filter) {
+    public static <T> void filter(Iterable<T> iterable, Predicate<T> predicate) {
         if (isEmpty(iterable)) {
             return;
         }
         Iterator<T> iterator = iterable.iterator();
         while (iterator.hasNext()) {
             T t = iterator.next();
-            if (!filter.keep(t)) {
+            if (!predicate.test(t)) {
                 iterator.remove();
             }
         }
@@ -1394,11 +1403,11 @@ public class CollectionUtil {
         }
     }
 
-    public static <T, K> void distinct(Collection<T> collection, Mapper<T, K> mapper) {
+    public static <T, K> void distinct(Collection<T> collection, Function<T, K> mapper) {
         distinct(collection, false, mapper);
     }
 
-    public static <T, K> void distinct(Collection<T> collection, boolean keepNull, Mapper<T, K> mapper) {
+    public static <T, K> void distinct(Collection<T> collection, boolean keepNull, Function<T, K> mapper) {
         if (isEmpty(collection)) {
             return;
         }
@@ -1407,7 +1416,7 @@ public class CollectionUtil {
         Iterator<T> iterator = collection.iterator();
         while (iterator.hasNext()) {
             T t = iterator.next();
-            K k = mapper.map(t);
+            K k = mapper.apply(t);
             if (k == null && !keepNull) {
                 iterator.remove();
             }
@@ -1446,11 +1455,11 @@ public class CollectionUtil {
         return list;
     }
 
-    public static <T, K> ArrayList<T> newDistinctList(Collection<T> collection, Mapper<T, K> mapper) {
+    public static <T, K> ArrayList<T> newDistinctList(Collection<T> collection, Function<T, K> mapper) {
         return newDistinctList(collection, false, mapper);
     }
 
-    public static <T, K> ArrayList<T> newDistinctList(Collection<T> collection, boolean keepNull, Mapper<T, K> mapper) {
+    public static <T, K> ArrayList<T> newDistinctList(Collection<T> collection, boolean keepNull, Function<T, K> mapper) {
         ArrayList<T> list = new ArrayList<>();
         if (isEmpty(collection)) {
             return list;
@@ -1459,7 +1468,7 @@ public class CollectionUtil {
         HashSet<K> set = new HashSet<>();
 
         for (T t : collection) {
-            K key = mapper.map(t);
+            K key = mapper.apply(t);
             if (key == null && !keepNull) {
                 continue;
             }
@@ -1504,19 +1513,19 @@ public class CollectionUtil {
         return list;
     }
 
-    public static <T, K> ArrayList<T> merge(Mapper<T, K> mapper, Collection<T>... collections) {
+    public static <T, K> ArrayList<T> merge(Function<T, K> mapper, Collection<T>... collections) {
         return merge(mapper, false, collections);
     }
 
-    public static <T, K> ArrayList<T> merge(Mapper<T, K> mapper, boolean keepNull, Collection<T>... collections) {
+    public static <T, K> ArrayList<T> merge(Function<T, K> mapper, boolean keepNull, Collection<T>... collections) {
         return merge(collections, keepNull, mapper);
     }
 
-    public static <T, K> ArrayList<T> merge(Collection<T>[] collections, Mapper<T, K> mapper) {
+    public static <T, K> ArrayList<T> merge(Collection<T>[] collections, Function<T, K> mapper) {
         return merge(collections, false, mapper);
     }
 
-    public static <T, K> ArrayList<T> merge(Collection<T>[] collections, boolean keepNull, Mapper<T, K> mapper) {
+    public static <T, K> ArrayList<T> merge(Collection<T>[] collections, boolean keepNull, Function<T, K> mapper) {
         ArrayList<T> list = new ArrayList<>();
         if (isEmpty(collections)) {
             return list;
@@ -1528,7 +1537,7 @@ public class CollectionUtil {
                 continue;
             }
             for (T t : c) {
-                K k = mapper.map(t);
+                K k = mapper.apply(t);
                 if (k == null && !keepNull) {
                     continue;
                 }
@@ -1567,7 +1576,7 @@ public class CollectionUtil {
         return list;
     }
 
-    public static <T, K> ArrayList<T> include(Collection<T> collection, Collection<K> target, Mapper<T, K> mapper) {
+    public static <T, K> ArrayList<T> include(Collection<T> collection, Collection<K> target, Function<T, K> mapper) {
         ArrayList<T> list = new ArrayList<>();
         if (isEmpty(collection)) {
             return list;
@@ -1584,7 +1593,7 @@ public class CollectionUtil {
         }
 
         for (T t : collection) {
-            K k = mapper.map(t);
+            K k = mapper.apply(t);
             if (set.contains(k)) {
                 list.add(t);
             }
@@ -1619,7 +1628,7 @@ public class CollectionUtil {
         return list;
     }
 
-    public static <T, K> ArrayList<T> exclude(Collection<T> collection, Collection<K> target, Mapper<T, K> mapper) {
+    public static <T, K> ArrayList<T> exclude(Collection<T> collection, Collection<K> target, Function<T, K> mapper) {
         ArrayList<T> list = new ArrayList<>();
         if (isEmpty(collection)) {
             return list;
@@ -1637,7 +1646,7 @@ public class CollectionUtil {
         }
 
         for (T t : collection) {
-            K k = mapper.map(t);
+            K k = mapper.apply(t);
             if (!set.contains(k)) {
                 list.add(t);
             }
@@ -1646,30 +1655,30 @@ public class CollectionUtil {
         return list;
     }
 
-    public static <T> void forEach(Iterable<T> iterable, IndexProcessor<T> indexProcessor) {
+    public static <T> void forEach(Iterable<T> iterable, ObjectIndexConsumer<T> indexProcessor) {
         if (isEmpty(iterable)) {
             return;
         }
 
         int index = 0;
         for (T t : iterable) {
-            indexProcessor.process(index, t);
+            indexProcessor.accept(t, index);
             index++;
         }
     }
 
-    public static <T> void forEach(T[] array, IndexProcessor<T> indexProcessor) {
+    public static <T> void forEach(T[] array, ObjectIndexConsumer<T> indexProcessor) {
         if (isEmpty(array)) {
             return;
         }
         int index = 0;
         for (T t : array) {
-            indexProcessor.process(index, t);
+            indexProcessor.accept(t, index);
             index++;
         }
     }
 
-    public static <T> void reverseTraverse(Iterable<T> iterable, IndexProcessor<T> indexProcessor) {
+    public static <T> void reverseTraverse(Iterable<T> iterable, ObjectIndexConsumer<T> indexProcessor) {
         if (isEmpty(iterable)) {
             return;
         }
@@ -1682,31 +1691,31 @@ public class CollectionUtil {
         }
     }
 
-    public static <T> void reverseTraverse(T[] array, IndexProcessor<T> indexProcessor) {
+    public static <T> void reverseTraverse(T[] array, ObjectIndexConsumer<T> indexProcessor) {
         if (isEmpty(array)) {
             return;
         }
 
         for (int index = array.length - 1; index >= 0; index--) {
-            indexProcessor.process(index, array[index]);
+            indexProcessor.accept(array[index], index);
         }
     }
 
-    public static <T> void reverseTraverse(List<T> list, IndexProcessor<T> indexProcessor) {
+    public static <T> void reverseTraverse(List<T> list, ObjectIndexConsumer<T> indexProcessor) {
         if (isEmpty(list)) {
             return;
         }
 
         for (int index = list.size() - 1; index >= 0; index--) {
-            indexProcessor.process(index, list.get(index));
+            indexProcessor.accept(list.get(index), index);
         }
     }
 
-    public static <T, K> HashSet<K> extractSet(Collection<T> collection, Mapper<T, K> mapper) {
+    public static <T, K> HashSet<K> extractSet(Collection<T> collection, Function<T, K> mapper) {
         return extractSet(collection, false, mapper);
     }
 
-    public static <T, K> HashSet<K> extractSet(Collection<T> collection, boolean keepNull, Mapper<T, K> mapper) {
+    public static <T, K> HashSet<K> extractSet(Collection<T> collection, boolean keepNull, Function<T, K> mapper) {
         HashSet<K> set = new HashSet<>();
 
         if (isEmpty(collection)) {
@@ -1714,7 +1723,7 @@ public class CollectionUtil {
         }
 
         for (T t : collection) {
-            K key = mapper.map(t);
+            K key = mapper.apply(t);
             if (key == null && !keepNull) {
                 continue;
             }
@@ -1725,11 +1734,11 @@ public class CollectionUtil {
         return set;
     }
 
-    public static <T, K> ArrayList<K> extractList(Collection<T> collection, Mapper<T, K> mapper) {
+    public static <T, K> ArrayList<K> extractList(Collection<T> collection, Function<T, K> mapper) {
         return extractList(collection, false, mapper);
     }
 
-    public static <T, K> ArrayList<K> extractList(Collection<T> collection, boolean keepNull, Mapper<T, K> mapper) {
+    public static <T, K> ArrayList<K> extractList(Collection<T> collection, boolean keepNull, Function<T, K> mapper) {
         ArrayList<K> list = new ArrayList<>();
 
         if (isEmpty(collection)) {
@@ -1737,7 +1746,7 @@ public class CollectionUtil {
         }
 
         for (T t : collection) {
-            K key = mapper.map(t);
+            K key = mapper.apply(t);
             if (key == null && !keepNull) {
                 continue;
             }
@@ -1781,7 +1790,7 @@ public class CollectionUtil {
         return getSizeRange(arrays).getEnd();
     }
 
-    public static <T> ArrayList<T> clone(Iterable<T> src, Mapper<T, T> mapper) {
+    public static <T> ArrayList<T> clone(Iterable<T> src, Function<T, T> mapper) {
         ArrayList<T> cloneList = new ArrayList<>();
 
         if (src == null) {
@@ -1789,7 +1798,7 @@ public class CollectionUtil {
         }
 
         for (T t : src) {
-            T clone = mapper.map(t);
+            T clone = mapper.apply(t);
             cloneList.add(clone);
         }
 
@@ -2103,165 +2112,165 @@ public class CollectionUtil {
         return new ArrayList<>(entrySet);
     }
 
-    public static <T, E> List<E> convert(Iterable<? extends T> srcList, IndexMapper<T, E> mapper) {
+    public static <T, E> List<E> convert(Iterable<? extends T> srcList, ObjectIndexFunction<T, E> mapper) {
         if (isEmpty(srcList)) {
             return Collections.emptyList();
         }
         ArrayList<E> dstList = new ArrayList<>();
-        int i = 0;
+        int index = 0;
         for (T t : srcList) {
-            dstList.add(mapper.map(i, t));
-            i++;
+            dstList.add(mapper.apply(t, index));
+            index++;
         }
         return dstList;
     }
 
-    public static <T, E> List<E> convert(T[] array, IndexMapper<T, E> mapper) {
+    public static <T, E> List<E> convert(T[] array, ObjectIndexFunction<T, E> mapper) {
         if (isEmpty(array)) {
             return Collections.emptyList();
         }
         ArrayList<E> dstList = new ArrayList<>();
-        int i = 0;
+        int index = 0;
         for (T t : array) {
-            dstList.add(mapper.map(i, t));
-            i++;
+            dstList.add(mapper.apply(t, index));
+            index++;
         }
 
         return dstList;
     }
 
-    public static <T> int[] convert(Iterable<? extends T> iterable, IndexIntMapper<T> mapper) {
+    public static <T> int[] convert(Iterable<? extends T> iterable, IntIndexFunction<T> mapper) {
         if (isEmpty(iterable)) {
             return EMPTY_INT_ARRAY;
         }
 
         int size = size(iterable);
-        int i = 0;
+        int index = 0;
         int[] values = new int[size];
         for (T t : iterable) {
-            values[i] = mapper.map(i, t);
-            i++;
+            values[index] = mapper.apply(t, index);
+            index++;
         }
 
         return values;
     }
 
-    public static <T> int[] convert(T[] array, IndexIntMapper<T> mapper) {
+    public static <T> int[] convert(T[] array, IntIndexFunction<T> mapper) {
         if (isEmpty(array)) {
             return EMPTY_INT_ARRAY;
         }
         int size = array.length;
-        int i = 0;
+        int index = 0;
         int[] values = new int[size];
         for (T t : array) {
-            values[i] = mapper.map(i, t);
-            i++;
+            values[index] = mapper.apply(t, index);
+            index++;
         }
 
         return values;
     }
 
-    public static <T> long[] convert(Iterable<? extends T> iterable, IndexLongMapper<T> mapper) {
+    public static <T> long[] convert(Iterable<? extends T> iterable, LongIndexFunction<T> mapper) {
         if (isEmpty(iterable)) {
             return EMPTY_LONG_ARRAY;
         }
 
         int size = size(iterable);
-        int i = 0;
+        int index = 0;
         long[] values = new long[size];
         for (T t : iterable) {
-            values[i] = mapper.map(i, t);
-            i++;
+            values[index] = mapper.apply(t, index);
+            index++;
         }
 
         return values;
     }
 
-    public static <T> long[] convert(T[] array, IndexLongMapper<T> mapper) {
+    public static <T> long[] convert(T[] array, LongIndexFunction<T> mapper) {
         if (isEmpty(array)) {
             return EMPTY_LONG_ARRAY;
         }
         int size = array.length;
-        int i = 0;
+        int index = 0;
         long[] values = new long[size];
         for (T t : array) {
-            values[i] = mapper.map(i, t);
-            i++;
+            values[index] = mapper.apply(t, index);
+            index++;
         }
 
         return values;
     }
 
-    public static <T> double[] convert(Iterable<? extends T> iterable, IndexDoubleMapper<T> mapper) {
+    public static <T> double[] convert(Iterable<? extends T> iterable, DoubleIndexFunction<T> mapper) {
         if (isEmpty(iterable)) {
             return EMPTY_DOUBLE_ARRAY;
         }
 
         int size = size(iterable);
-        int i = 0;
+        int index = 0;
         double[] values = new double[size];
         for (T t : iterable) {
-            values[i] = mapper.map(i, t);
-            i++;
+            values[index] = mapper.apply(t, index);
+            index++;
         }
 
         return values;
     }
 
-    public static <T> double[] convert(T[] array, IndexDoubleMapper<T> mapper) {
+    public static <T> double[] convert(T[] array, DoubleIndexFunction<T> mapper) {
         if (isEmpty(array)) {
             return EMPTY_DOUBLE_ARRAY;
         }
         int size = array.length;
-        int i = 0;
+        int index = 0;
         double[] values = new double[size];
         for (T t : array) {
-            values[i] = mapper.map(i, t);
-            i++;
+            values[index] = mapper.apply(t, index);
+            index++;
         }
 
         return values;
     }
 
-    public static <T, E> void convert(T[] srcArray, E[] dstArray, IndexMapper<T, E> mapper) {
+    public static <T, E> void convert(T[] srcArray, E[] dstArray, ObjectIndexFunction<T, E> mapper) {
         if (isEmpty(srcArray) || isEmpty(dstArray)) {
             return;
         }
 
-        for (int i = 0, size = Math.min(srcArray.length, dstArray.length); i < size; i++) {
-            T t = srcArray[i];
-            dstArray[i] = mapper.map(i, t);
+        for (int index = 0, size = Math.min(srcArray.length, dstArray.length); index < size; index++) {
+            T t = srcArray[index];
+            dstArray[index] = mapper.apply(t, index);
         }
     }
 
-    public static <T, E> List<E> convert(Iterable<? extends T> srcList, Mapper<T, E> mapper) {
+    public static <T, E> List<E> convert(Iterable<? extends T> srcList, Function<T, E> mapper) {
         if (isEmpty(srcList)) {
             return Collections.emptyList();
         }
         ArrayList<E> dstList = new ArrayList<>();
         int i = 0;
         for (T t : srcList) {
-            dstList.add(mapper.map(t));
+            dstList.add(mapper.apply(t));
             i++;
         }
         return dstList;
     }
 
-    public static <T, E> List<E> convert(T[] array, Mapper<T, E> mapper) {
+    public static <T, E> List<E> convert(T[] array, Function<T, E> mapper) {
         if (isEmpty(array)) {
             return Collections.emptyList();
         }
         ArrayList<E> dstList = new ArrayList<>();
         int i = 0;
         for (T t : array) {
-            dstList.add(mapper.map(t));
+            dstList.add(mapper.apply(t));
             i++;
         }
 
         return dstList;
     }
 
-    public static <T> int[] convert(Iterable<? extends T> iterable, IntMapper<T> mapper) {
+    public static <T> int[] convert(Iterable<? extends T> iterable, IntFunction<T> mapper) {
         if (isEmpty(iterable)) {
             return EMPTY_INT_ARRAY;
         }
@@ -2270,28 +2279,28 @@ public class CollectionUtil {
         int i = 0;
         int[] values = new int[size];
         for (T t : iterable) {
-            values[i] = mapper.map(t);
+            values[i] = mapper.apply(t);
             i++;
         }
 
         return values;
     }
 
-    public static <T> int[] convert(T[] array, IntMapper<T> mapper) {
+    public static <T> int[] convert(T[] array, IntFunction<T> mapper) {
         if (isEmpty(array)) {
             return EMPTY_INT_ARRAY;
         }
         int i = 0;
         int[] values = new int[array.length];
         for (T t : array) {
-            values[i] = mapper.map(t);
+            values[i] = mapper.apply(t);
             i++;
         }
 
         return values;
     }
 
-    public static <T> long[] convert(Iterable<? extends T> iterable, LongMapper<T> mapper) {
+    public static <T> long[] convert(Iterable<? extends T> iterable, LongFunction<T> mapper) {
         if (isEmpty(iterable)) {
             return EMPTY_LONG_ARRAY;
         }
@@ -2300,14 +2309,14 @@ public class CollectionUtil {
         int i = 0;
         long[] values = new long[size];
         for (T t : iterable) {
-            values[i] = mapper.map(t);
+            values[i] = mapper.apply(t);
             i++;
         }
 
         return values;
     }
 
-    public static <T> long[] convert(T[] array, LongMapper<T> mapper) {
+    public static <T> long[] convert(T[] array, LongFunction<T> mapper) {
         if (isEmpty(array)) {
             return EMPTY_LONG_ARRAY;
         }
@@ -2315,14 +2324,14 @@ public class CollectionUtil {
         int i = 0;
         long[] values = new long[size];
         for (T t : array) {
-            values[i] = mapper.map(t);
+            values[i] = mapper.apply(t);
             i++;
         }
 
         return values;
     }
 
-    public static <T> double[] convert(Iterable<? extends T> iterable, DoubleMapper<T> mapper) {
+    public static <T> double[] convert(Iterable<? extends T> iterable, DoubleFunction<T> mapper) {
         if (isEmpty(iterable)) {
             return EMPTY_DOUBLE_ARRAY;
         }
@@ -2331,14 +2340,14 @@ public class CollectionUtil {
         int i = 0;
         double[] values = new double[size];
         for (T t : iterable) {
-            values[i] = mapper.map(t);
+            values[i] = mapper.apply(t);
             i++;
         }
 
         return values;
     }
 
-    public static <T> double[] convert(T[] array, DoubleMapper<T> mapper) {
+    public static <T> double[] convert(T[] array, DoubleFunction<T> mapper) {
         if (isEmpty(array)) {
             return EMPTY_DOUBLE_ARRAY;
         }
@@ -2346,7 +2355,7 @@ public class CollectionUtil {
         int i = 0;
         double[] values = new double[size];
         for (T t : array) {
-            values[i] = mapper.map(t);
+            values[i] = mapper.apply(t);
             i++;
         }
 
@@ -2355,26 +2364,20 @@ public class CollectionUtil {
 
     // =================================== //
 
-    public static <T, E> void convert(T[] srcArray, E[] dstArray, Mapper<T, E> mapper) {
+    public static <T, E> void convert(T[] srcArray, E[] dstArray, Function<T, E> mapper) {
         if (isEmpty(srcArray) || isEmpty(dstArray)) {
             return;
         }
 
         for (int i = 0, size = Math.min(srcArray.length, dstArray.length); i < size; i++) {
             T t = srcArray[i];
-            dstArray[i] = mapper.map(t);
+            dstArray[i] = mapper.apply(t);
         }
     }
 
 
     public static <T> T[] concat(T[]... arrays) {
-        SearchResult<T> result = find(arrays, new Matcher<T>() {
-            @Override
-            public boolean isMatch(T t) {
-                return t != null;
-            }
-        });
-
+        SearchResult<T> result = find(arrays, (Predicate<T>) ObjectUtil::hasValue);
         if (result == null) {
             return null;
         }
@@ -2479,12 +2482,7 @@ public class CollectionUtil {
     }
 
     public static <T> T[] toArray(Iterable<T> iterable) {
-        T t = find(iterable, new Matcher<T>() {
-            @Override
-            public boolean isMatch(T t) {
-                return t != null;
-            }
-        });
+        T t = find(iterable, ObjectUtil::hasValue);
         if (t == null) {
             return null;
         }
@@ -2511,50 +2509,50 @@ public class CollectionUtil {
         return array;
     }
 
-    public static <T, R> R[] toArray(Iterable<T> iterable, Class<R> cls, Mapper<T, R> mapper) {
+    public static <T, R> R[] toArray(Iterable<T> iterable, Class<R> cls, Function<T, R> mapper) {
         int size = size(iterable);
         R[] array = (R[]) java.lang.reflect.Array.newInstance(cls, size);
         return toArray(iterable, size, array, mapper);
     }
 
-    public static <T, R> R[] toArray(Iterable<T> iterable, R[] array, Mapper<T, R> mapper) {
+    public static <T, R> R[] toArray(Iterable<T> iterable, R[] array, Function<T, R> mapper) {
         int size = size(iterable);
         int arraySize = size(array);
         return toArray(iterable, size, array, mapper);
     }
 
-    private static <T, R> R[] toArray(Iterable<T> iterable, int size, R[] array, Mapper<T, R> mapper) {
+    private static <T, R> R[] toArray(Iterable<T> iterable, int size, R[] array, Function<T, R> mapper) {
         if (size == 0) {
             return array;
         }
         int index = 0;
         for (T t : iterable) {
-            array[index] = mapper.map(t);
+            array[index] = mapper.apply(t);
             ++index;
         }
 
         return array;
     }
 
-    public static <T, R> R[] toArray(Iterable<T> iterable, Class<R> cls, IndexMapper<T, R> mapper) {
+    public static <T, R> R[] toArray(Iterable<T> iterable, Class<R> cls, ObjectIndexFunction<T, R> mapper) {
         int size = size(iterable);
         R[] array = (R[]) java.lang.reflect.Array.newInstance(cls, size);
         return toArray(iterable, size, array, mapper);
     }
 
-    public static <T, R> R[] toArray(Iterable<T> iterable, R[] array, IndexMapper<T, R> mapper) {
+    public static <T, R> R[] toArray(Iterable<T> iterable, R[] array, ObjectIndexFunction<T, R> mapper) {
         int size = size(iterable);
         int arraySize = size(array);
         return toArray(iterable, size, array, mapper);
     }
 
-    private static <T, R> R[] toArray(Iterable<T> iterable, int size, R[] array, IndexMapper<T, R> mapper) {
+    private static <T, R> R[] toArray(Iterable<T> iterable, int size, R[] array, ObjectIndexFunction<T, R> mapper) {
         if (size == 0) {
             return array;
         }
         int index = 0;
         for (T t : iterable) {
-            array[index] = mapper.map(index, t);
+            array[index] = mapper.apply(t, index);
             ++index;
         }
 
@@ -2619,15 +2617,15 @@ public class CollectionUtil {
             Collections.reverse(target);
         } else {
             int size = size(source);
-            Array<T> array = new Array<>(size);
+            Object[] array = new Object[size];
 
             int index = 0;
             for (T t : source) {
-                array.set(size - 1 - index, t);
+                array[size - 1 - index] = t;
                 index++;
             }
 
-            target = array.toList();
+            target = (List<T>) new ArrayList<>(Arrays.asList(array));
         }
 
         return target;
@@ -2681,11 +2679,11 @@ public class CollectionUtil {
         return removedCount;
     }
 
-    public static <T> int remove(Iterable<T> iterable, Matcher<T> matcher) {
+    public static <T> int remove(Iterable<T> iterable, Predicate<T> matcher) {
         return remove(iterable, 0, matcher);
     }
 
-    public static <T> int remove(Iterable<T> iterable, int startIndex, Matcher<T> matcher) {
+    public static <T> int remove(Iterable<T> iterable, int startIndex, Predicate<T> matcher) {
         if (isOutOfIndex(iterable, startIndex)) {
             return 0;
         }
@@ -2695,7 +2693,7 @@ public class CollectionUtil {
         Iterator<T> iterator = iterable.iterator();
         while (iterator.hasNext()) {
             T t = iterator.next();
-            if (index >= startIndex && matcher.isMatch(t)) {
+            if (index >= startIndex && matcher.test(t)) {
                 iterator.remove();
                 removeCount++;
             }
@@ -2766,14 +2764,14 @@ public class CollectionUtil {
 
     // ================================= //
 
-    public static <T> IntRange intMinMax(Iterable<T> iterable, IntMapper<T> mapper) {
+    public static <T> IntRange intMinMax(Iterable<T> iterable, IntFunction<T> mapper) {
         if (iterable == null) {
             return null;
         }
         IntRange intRange = null;
         int index = 0;
         for (T t : iterable) {
-            int value = mapper.map(t);
+            int value = mapper.apply(t);
             if (index == 0) {
                 intRange = new IntRange(value, value);
             } else {
@@ -2791,14 +2789,14 @@ public class CollectionUtil {
         return intRange;
     }
 
-    public static <T> LongRange longMinMax(Iterable<T> iterable, LongMapper<T> mapper) {
+    public static <T> LongRange longMinMax(Iterable<T> iterable, LongFunction<T> mapper) {
         if (iterable == null) {
             return null;
         }
         LongRange intRange = null;
         int index = 0;
         for (T t : iterable) {
-            long value = mapper.map(t);
+            long value = mapper.apply(t);
             if (index == 0) {
                 intRange = new LongRange(value, value);
             } else {
@@ -2816,14 +2814,14 @@ public class CollectionUtil {
         return intRange;
     }
 
-    public static <T> DoubleRange doubleMinMax(Iterable<T> iterable, DoubleMapper<T> mapper) {
+    public static <T> DoubleRange doubleMinMax(Iterable<T> iterable, DoubleFunction<T> mapper) {
         if (iterable == null) {
             return null;
         }
         DoubleRange doubleRange = null;
         int index = 0;
         for (T t : iterable) {
-            double value = mapper.map(t);
+            double value = mapper.apply(t);
             if (index == 0) {
                 doubleRange = new DoubleRange(value, value);
             } else {
@@ -2843,15 +2841,15 @@ public class CollectionUtil {
 
     // ============================ //
 
-    public static <T> IntRange intMinMax(Iterable<T> iterable, IntMapper<T> minMapper, IntMapper<T> maxMapper) {
+    public static <T> IntRange intMinMax(Iterable<T> iterable, IntFunction<T> minMapper, IntFunction<T> maxMapper) {
         if (iterable == null) {
             return null;
         }
         IntRange intRange = null;
         int index = 0;
         for (T t : iterable) {
-            int min = minMapper.map(t);
-            int max = maxMapper.map(t);
+            int min = minMapper.apply(t);
+            int max = maxMapper.apply(t);
 
             if (index == 0) {
                 intRange = new IntRange(min, max);
@@ -2870,15 +2868,15 @@ public class CollectionUtil {
         return intRange;
     }
 
-    public static <T> LongRange longMinMax(Iterable<T> iterable, LongMapper<T> minMapper, LongMapper<T> maxMapper) {
+    public static <T> LongRange longMinMax(Iterable<T> iterable, LongFunction<T> minMapper, LongFunction<T> maxMapper) {
         if (iterable == null) {
             return null;
         }
         LongRange intRange = null;
         int index = 0;
         for (T t : iterable) {
-            long min = minMapper.map(t);
-            long max = maxMapper.map(t);
+            long min = minMapper.apply(t);
+            long max = maxMapper.apply(t);
 
             if (index == 0) {
                 intRange = new LongRange(min, max);
@@ -2897,15 +2895,15 @@ public class CollectionUtil {
         return intRange;
     }
 
-    public static <T> DoubleRange doubleMinMax(Iterable<T> iterable, DoubleMapper<T> minMapper, DoubleMapper<T> maxMapper) {
+    public static <T> DoubleRange doubleMinMax(Iterable<T> iterable, DoubleFunction<T> minMapper, DoubleFunction<T> maxMapper) {
         if (iterable == null) {
             return null;
         }
         DoubleRange doubleRange = null;
         int index = 0;
         for (T t : iterable) {
-            double min = minMapper.map(t);
-            double max = maxMapper.map(t);
+            double min = minMapper.apply(t);
+            double max = maxMapper.apply(t);
 
             if (index == 0) {
                 doubleRange = new DoubleRange(min, max);

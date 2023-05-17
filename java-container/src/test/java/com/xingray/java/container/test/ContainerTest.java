@@ -1,8 +1,8 @@
 package com.xingray.java.container.test;
 
 
-import com.xingray.java.container.container.Container;
 import com.xingray.java.container.container.Containers;
+import com.xingray.java.container.interfaces.container.Container;
 import org.junit.jupiter.api.Test;
 
 public class ContainerTest {

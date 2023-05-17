@@ -1,7 +1,6 @@
 package com.xingray.java.util;
 
 
-import com.xingray.java.base.interfaces.Mapper;
 import com.xingray.java.util.collection.CollectionUtil;
 
 import java.io.*;
@@ -11,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -456,17 +456,17 @@ public class FileUtil {
     }
 
 
-    private static final Mapper<Integer, String> DEFAULT_DIFF_PROVIDER = i -> "(" + i + ")";
+    private static final Function<Integer, String> DEFAULT_DIFF_PROVIDER = i -> "(" + i + ")";
 
     public static String getNewFilePath(String path, String prefix, String[] names, String suffix) {
         return getNewFilePath(path, prefix, names, suffix, "_", DEFAULT_DIFF_PROVIDER);
     }
 
-    public static String getNewFilePath(String path, String prefix, String[] names, String suffix, Mapper<Integer, String> diffProvider) {
+    public static String getNewFilePath(String path, String prefix, String[] names, String suffix, Function<Integer, String> diffProvider) {
         return getNewFilePath(path, prefix, names, suffix, "_", diffProvider);
     }
 
-    public static String getNewFilePath(String path, String prefix, String[] names, String suffix, String sep, Mapper<Integer, String> diffProvider) {
+    public static String getNewFilePath(String path, String prefix, String[] names, String suffix, String sep, Function<Integer, String> diffProvider) {
         StringBuilder builder = new StringBuilder();
         builder.append(prefix);
         if (names != null && names.length > 0) {
@@ -481,7 +481,7 @@ public class FileUtil {
 
         int i = 1;
         do {
-            filePath = path + File.separator + name + sep + diffProvider.map(i) + suffix;
+            filePath = path + File.separator + name + sep + diffProvider.apply(i) + suffix;
             i++;
         } while (isFileExist(filePath));
 

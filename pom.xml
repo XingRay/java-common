@@ -9,16 +9,20 @@
     <version>1.0.0</version>
     <packaging>pom</packaging>
     <modules>
-        <module>java-base</module>
+        <module>java-value</module>
         <module>java-util</module>
         <module>java-container</module>
         <module>java-config</module>
         <module>java-command</module>
+        <module>java-interfaces</module>
+        <module>java-container-interfaces</module>
     </modules>
 
     <properties>
+        <maven.compiler.source>20</maven.compiler.source>
+        <maven.compiler.target>20</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>17</java.version>
+
         <java-common.version>1.0.0</java-common.version>
     </properties>
 
@@ -33,13 +37,31 @@
 
             <dependency>
                 <groupId>com.xingray</groupId>
-                <artifactId>java-base</artifactId>
+                <artifactId>java-value</artifactId>
+                <version>${java-common.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.xingray</groupId>
+                <artifactId>java-interfaces</artifactId>
                 <version>${java-common.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.xingray</groupId>
                 <artifactId>java-container</artifactId>
+                <version>${java-common.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.xingray</groupId>
+                <artifactId>java-container-interfaces</artifactId>
+                <version>${java-common.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.xingray</groupId>
+                <artifactId>java-util</artifactId>
                 <version>${java-common.version}</version>
             </dependency>
 
@@ -67,8 +89,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.10.1</version>
                 <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
                 </configuration>
             </plugin>
         </plugins>

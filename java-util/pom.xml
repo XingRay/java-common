@@ -14,14 +14,17 @@
     <dependencies>
         <dependency>
             <groupId>com.xingray</groupId>
-            <artifactId>java-base</artifactId>
-            <version>1.0.0</version>
+            <artifactId>java-value</artifactId>
         </dependency>
 
         <dependency>
             <groupId>com.xingray</groupId>
-            <artifactId>java-container</artifactId>
-            <version>1.0.0</version>
+            <artifactId>java-interfaces</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.xingray</groupId>
+            <artifactId>java-container-interfaces</artifactId>
         </dependency>
 
         <dependency>

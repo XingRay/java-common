@@ -12,6 +12,10 @@ import java.util.Map;
 
 public class ObjectUtil {
 
+    public static <T> boolean hasValue(T obj) {
+        return obj != null;
+    }
+
     public static <T> T mapToObject(Map<String, Object> map, Class<T> cls) {
         if (map == null || map.isEmpty()) {
             return null;

@@ -1,7 +1,8 @@
 package com.xingray.java.container.array;
 
 
-import com.xingray.java.container.series.DoubleSeries;
+
+import com.xingray.java.container.interfaces.series.DoubleSeries;
 
 import java.util.ArrayList;
 import java.util.Collections;
