@@ -5,4 +5,5 @@ module com.xingray.java.util {
 
     exports com.xingray.java.util;
     exports com.xingray.java.util.collection;
+    exports com.xingray.java.util.object;
 }

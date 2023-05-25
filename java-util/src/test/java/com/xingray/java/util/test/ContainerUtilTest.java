@@ -1,7 +1,8 @@
-package com.xingray.java.util;
+package com.xingray.java.util.test;
 
+import com.xingray.java.util.StringUtil;
 import com.xingray.java.util.collection.CollectionUtil;
-import com.xingray.java.util.entity.User;
+import com.xingray.java.util.test.entity.User;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

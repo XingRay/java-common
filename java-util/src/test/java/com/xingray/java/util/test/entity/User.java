@@ -1,4 +1,4 @@
-package com.xingray.java.util.entity;
+package com.xingray.java.util.test.entity;
 
 public class User {
     private Long id;
