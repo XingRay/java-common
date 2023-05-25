@@ -2,13 +2,9 @@ package com.xingray.java.util;
 
 
 import java.lang.invoke.SerializedLambda;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
+import java.lang.reflect.*;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class ObjectUtil {
 
@@ -114,7 +110,7 @@ public class ObjectUtil {
         } else if (type == Integer.class) {
             return NumberUtil.toInteger(value);
         } else if (type == int.class) {
-            return NumberUtil.toInt(value);
+            return NumberUtil.toIntValue(value);
         } else if (type == Double.class) {
             return NumberUtil.toDouble(value);
         } else if (type == double.class) {
@@ -138,10 +134,285 @@ public class ObjectUtil {
         } else if (type == Character.class) {
             return NumberUtil.toCharacter(value);
         } else if (type == char.class) {
-            return NumberUtil.toChar(value);
+            return NumberUtil.toCharValue(value);
         }
 
         return null;
+    }
+
+    public static Object stringArrayToTypeArray(String[] array, Class<?> elementType) {
+        if (array == null) {
+            return null;
+        }
+
+        if (elementType.equals(String.class)) {
+            return array;
+        }
+
+        Object targetArray = Array.newInstance(elementType, array.length);
+        if (elementType == Long.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                Array.set(targetArray, i, NumberUtil.toLong(array[i]));
+            }
+        } else if (elementType == long.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                Array.set(targetArray, i, NumberUtil.toLongValue(array[i]));
+            }
+        } else if (elementType == Integer.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                Array.set(targetArray, i, NumberUtil.toInteger(array[i]));
+            }
+        } else if (elementType == int.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                Array.set(targetArray, i, NumberUtil.toIntValue(array[i]));
+            }
+        } else if (elementType == Double.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                Array.set(targetArray, i, NumberUtil.toDouble(array[i]));
+            }
+        } else if (elementType == double.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                Array.set(targetArray, i, NumberUtil.toDoubleValue(array[i]));
+            }
+        } else if (elementType == Float.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                Array.set(targetArray, i, NumberUtil.toFloat(array[i]));
+            }
+        } else if (elementType == float.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                Array.set(targetArray, i, NumberUtil.toFloatValue(array[i]));
+            }
+        } else if (elementType == Boolean.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                Array.set(targetArray, i, NumberUtil.toBoolean(array[i]));
+            }
+        } else if (elementType == boolean.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                Array.set(targetArray, i, NumberUtil.toBooleanValue(array[i]));
+            }
+        } else if (elementType == Byte.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                Array.set(targetArray, i, NumberUtil.toByte(array[i]));
+            }
+        } else if (elementType == byte.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                Array.set(targetArray, i, NumberUtil.toByteValue(array[i]));
+            }
+        } else if (elementType == Short.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                Array.set(targetArray, i, NumberUtil.toShort(array[i]));
+            }
+        } else if (elementType == short.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                Array.set(targetArray, i, NumberUtil.toShortValue(array[i]));
+            }
+        } else if (elementType == Character.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                Array.set(targetArray, i, NumberUtil.toCharacter(array[i]));
+            }
+        } else if (elementType == char.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                Array.set(targetArray, i, NumberUtil.toCharValue(array[i]));
+            }
+        }
+
+        return null;
+    }
+
+    public static <T> Object arrayToTypeArray(T[] array, Class<?> elementType) {
+        if (array == null) {
+            return null;
+        }
+
+        if (elementType.equals(array.getClass().getComponentType())) {
+            return array;
+        }
+
+        Object targetArray = Array.newInstance(elementType, array.length);
+        if (elementType == Long.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                Array.set(targetArray, i, NumberUtil.toLong(array[i]));
+            }
+        } else if (elementType == long.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                Array.set(targetArray, i, NumberUtil.toLongValue(array[i]));
+            }
+        } else if (elementType == Integer.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                Array.set(targetArray, i, NumberUtil.toInteger(array[i]));
+            }
+        } else if (elementType == int.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                Array.set(targetArray, i, NumberUtil.toIntValue(array[i]));
+            }
+        } else if (elementType == Double.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                Array.set(targetArray, i, NumberUtil.toDouble(array[i]));
+            }
+        } else if (elementType == double.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                Array.set(targetArray, i, NumberUtil.toDoubleValue(array[i]));
+            }
+        } else if (elementType == Float.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                Array.set(targetArray, i, NumberUtil.toFloat(array[i]));
+            }
+        } else if (elementType == float.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                Array.set(targetArray, i, NumberUtil.toFloatValue(array[i]));
+            }
+        } else if (elementType == Boolean.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                Array.set(targetArray, i, NumberUtil.toBoolean(array[i]));
+            }
+        } else if (elementType == boolean.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                Array.set(targetArray, i, NumberUtil.toBooleanValue(array[i]));
+            }
+        } else if (elementType == Byte.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                Array.set(targetArray, i, NumberUtil.toByte(array[i]));
+            }
+        } else if (elementType == byte.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                Array.set(targetArray, i, NumberUtil.toByteValue(array[i]));
+            }
+        } else if (elementType == Short.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                Array.set(targetArray, i, NumberUtil.toShort(array[i]));
+            }
+        } else if (elementType == short.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                Array.set(targetArray, i, NumberUtil.toShortValue(array[i]));
+            }
+        } else if (elementType == Character.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                Array.set(targetArray, i, NumberUtil.toCharacter(array[i]));
+            }
+        } else if (elementType == char.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                Array.set(targetArray, i, NumberUtil.toCharValue(array[i]));
+            }
+        }
+
+        return null;
+    }
+
+    public static <T, R> List<R> arrayToTypeList(T[] array, Class<R> elementType) {
+        if (array == null) {
+            return null;
+        }
+        if (array.length == 0) {
+            return Collections.emptyList();
+        }
+
+        if (elementType.equals(array.getClass().getComponentType())) {
+            return (List<R>) Arrays.asList(array);
+        }
+
+        ArrayList list = new ArrayList<>(array.length);
+        if (elementType == Long.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                list.add(NumberUtil.toLong(array[i]));
+            }
+        } else if (elementType == long.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                list.add(NumberUtil.toLongValue(array[i]));
+            }
+        } else if (elementType == Integer.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                list.add(NumberUtil.toInteger(array[i]));
+            }
+        } else if (elementType == int.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                list.add(NumberUtil.toIntValue(array[i]));
+            }
+        } else if (elementType == Double.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                list.add(NumberUtil.toDouble(array[i]));
+            }
+        } else if (elementType == double.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                list.add(NumberUtil.toDoubleValue(array[i]));
+            }
+        } else if (elementType == Float.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                list.add(NumberUtil.toFloat(array[i]));
+            }
+        } else if (elementType == float.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                list.add(NumberUtil.toFloatValue(array[i]));
+            }
+        } else if (elementType == Boolean.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                list.add(NumberUtil.toBoolean(array[i]));
+            }
+        } else if (elementType == boolean.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                list.add(NumberUtil.toBooleanValue(array[i]));
+            }
+        } else if (elementType == Byte.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                list.add(NumberUtil.toByte(array[i]));
+            }
+        } else if (elementType == byte.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                list.add(NumberUtil.toByteValue(array[i]));
+            }
+        } else if (elementType == Short.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                list.add(NumberUtil.toShort(array[i]));
+            }
+        } else if (elementType == short.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                list.add(NumberUtil.toShortValue(array[i]));
+            }
+        } else if (elementType == Character.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                list.add(NumberUtil.toCharacter(array[i]));
+            }
+        } else if (elementType == char.class) {
+            for (int i = 0, arrayLength = array.length; i < arrayLength; i++) {
+                list.add(NumberUtil.toCharValue(array[i]));
+            }
+        }
+
+        return null;
+    }
+
+
+    public static void setListValue(Object paramObject, Field field, String[] values, Class<?> fieldType) throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
+        //list类型
+        List list;
+        if (fieldType.equals(String[].class)) {
+            list = Arrays.asList(values);
+        } else {
+            list = arrayToTypeList(values, fieldType);
+        }
+        if (!fieldType.equals(List.class)) {
+            Constructor<?> constructor = fieldType.getDeclaredConstructor(null);
+            List newList = (List) constructor.newInstance(null);
+            newList.addAll(list);
+            list = newList;
+        }
+        if (list != null) {
+            field.setAccessible(true);
+            field.set(paramObject, list);
+        }
+    }
+
+    public static void setArrayValue(Object paramObject, Field field, String[] values, Class<?> fieldType) throws IllegalAccessException {
+        // 数组类型
+        Object array;
+        if (fieldType.equals(String[].class)) {
+            array = Arrays.copyOf(values, values.length);
+        } else {
+            array = arrayToTypeArray(values, fieldType.getComponentType());
+        }
+        if (array != null) {
+            field.setAccessible(true);
+            field.set(paramObject, array);
+        }
     }
 
     public static boolean isAllNull(Object... objects) {
@@ -193,6 +464,18 @@ public class ObjectUtil {
             e.printStackTrace();
             return null;
         }
+    }
+
+    private static final Map<Class, String> columnCache = new ConcurrentHashMap<>();
+
+    public static <T> String columnToStringCached(SFunction<T, ?> column) {
+        String cachedName = columnCache.get(column.getClass());
+        if (cachedName != null) {
+            return cachedName;
+        }
+        String columnName = columnToString(column);
+        columnCache.put(column.getClass(), columnName);
+        return columnName;
     }
 
     public static Method getInheritableMethod(Class<?> cl, String name,

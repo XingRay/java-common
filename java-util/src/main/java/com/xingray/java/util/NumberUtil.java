@@ -157,11 +157,11 @@ public class NumberUtil {
 
     // ==================== Character =======================//
 
-    public static char toChar(Object value) {
-        return toChar(value, (char) 0);
+    public static char toCharValue(Object value) {
+        return toCharValue(value, (char) 0);
     }
 
-    public static char toChar(Object o, char defaultValue) {
+    public static char toCharValue(Object o, char defaultValue) {
         char value = defaultValue;
         if (o == null) {
             return value;
@@ -310,11 +310,11 @@ public class NumberUtil {
 
     // ==================== Integer =======================//
 
-    public static int toInt(Object value) {
-        return toInt(value, 0);
+    public static int toIntValue(Object value) {
+        return toIntValue(value, 0);
     }
 
-    public static int toInt(Object o, int defaultValue) {
+    public static int toIntValue(Object o, int defaultValue) {
         int value = defaultValue;
         if (o == null) {
             return value;
