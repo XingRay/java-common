@@ -216,7 +216,7 @@ public class ObjectUtil {
             }
         }
 
-        return null;
+        return targetArray;
     }
 
     public static <T> Object arrayToTypeArray(T[] array, Class<?> elementType) {
@@ -295,7 +295,7 @@ public class ObjectUtil {
             }
         }
 
-        return null;
+        return targetArray;
     }
 
     public static <T, R> List<R> arrayToTypeList(T[] array, Class<R> elementType) {
@@ -377,7 +377,7 @@ public class ObjectUtil {
             }
         }
 
-        return null;
+        return list;
     }
 
 
