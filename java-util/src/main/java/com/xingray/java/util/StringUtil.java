@@ -416,7 +416,7 @@ public class StringUtil {
         int[] ints = new int[length];
 
         for (int i = 0; i < length; i++) {
-            ints[i] = NumberUtil.toInt(split[i], 0);
+            ints[i] = NumberUtil.toIntValue(split[i], 0);
         }
         return ints;
     }
