@@ -650,6 +650,26 @@ public class DateTimeUtil {
         return Instant.now().getEpochSecond();
     }
 
+    public static String nowToString() {
+        return nowToString("yyyy-MM-dd hh:mm:ss", ZoneId.of("+08:00"));
+    }
+
+    public static String nowToString(String pattern) {
+        return nowToString(pattern, ZoneId.of("+08:00"));
+    }
+
+    public static String nowToString(String pattern, String zoneId) {
+        return nowToString(pattern, ZoneId.of(zoneId));
+    }
+
+    public static String nowToString(String pattern, ZoneId zoneId) {
+        return LocalDateTime.ofInstant(Instant.now(), zoneId).format(DateTimeFormatter.ofPattern(pattern));
+    }
+
+    public static String localDateTimeToString(LocalDateTime localDateTime, String pattern) {
+        return localDateTime.format(DateTimeFormatter.ofPattern(pattern));
+    }
+
     public static long startMillsOfSameDay(long mills, ZoneId zoneId) {
         Instant instant = Instant.ofEpochMilli(mills);
         LocalDateTime localDateTime = LocalDate.ofInstant(instant, zoneId).atTime(0, 0, 0, 0);
@@ -799,5 +819,4 @@ public class DateTimeUtil {
     public static long endSecondsOfYear(int year) {
         return endSecondsOfYear(year, ZONE_ID_GMT);
     }
-
 }
